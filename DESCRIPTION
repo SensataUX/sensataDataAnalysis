@@ -28,7 +28,8 @@ Imports:
     jtools,
     interactions,
     plyr,
-    Hmisc
+    Hmisc, 
+    questionr
 Suggests:
     beepr,
     knitr,
