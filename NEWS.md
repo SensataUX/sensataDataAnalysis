@@ -1,3 +1,3 @@
 # sensataDataAnalysis 0.1.0
-
-* Added a `NEWS.md` file to track changes to the package.
+* REMEMBER YOU NEED TO INSTALL OPEN-SANS AND MONSERRAT FONT
+* Created first verstion of sensataDataAnalysis
