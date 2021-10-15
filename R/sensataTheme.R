@@ -4,7 +4,8 @@
 #' @inheritParams ggplot2::theme_grey # This here inherits params from theme_grey
 #' @family themes fivethirtyeight
 #' @export
-#' @example inst/examples/ex-theme_fivethirtyeight.R
+#TODO: ADD EXAMPLE
+# #' @example inst/examples/ex-theme_fivethirtyeight.R
 #' @importFrom grid unit
 theme_sensata <- function(base_size = 12, base_family = "sans") {
   colors <- deframe(ggthemes::ggthemes_data[["fivethirtyeight"]])
