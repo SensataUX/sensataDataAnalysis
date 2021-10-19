@@ -38,6 +38,13 @@ TODO: Create example
 ``` r
 library(sensataDataAnalysis)
 # this automatically loads tidyverse and labelled
+sensataExAnalysis <- sensataExAnalysis
+
+# create graphData 5 options (likert)
+createGraphData(df = sensataExAnalysis, originVar = "q_EA_IN_03", groupVar = "q_EA_CA_10")
+
+# create graphData 4 options (text)
+createGraphData(df = sensataExAnalysis, originVar = "q_EA_IN_03", groupVar = "q_EA_CA_10")
 ```
 
 ## TO-DO
