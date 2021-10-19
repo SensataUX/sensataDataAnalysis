@@ -19,6 +19,7 @@ Depends:
     R (>= 4.0.0),
     tidyverse (>= 1.3.0),
     labelled (>= 2.7.0),
+    showtext (>= 0.9)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 License: MIT + file LICENSE
@@ -29,8 +30,7 @@ Imports:
     jtools,
     interactions,
     Hmisc, 
-    questionr,
-    showtext
+    questionr
 Suggests:
     plyr,
     beepr,

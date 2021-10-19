@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sensataDataAnalysis
+# sensataDataAnalysis <img src="man/figures/sensata_logo_white.png" align="right" width="120" />
 
 <!-- badges: start -->
 <!-- badges: end -->
