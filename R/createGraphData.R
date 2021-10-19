@@ -20,11 +20,11 @@
 #' TBD
 #' @export
 
-createGraphData5option <- function(df = intData,
-                                   originVar,
-                                   groupVar = "Edad",
-                                   weigthVar = "ponde",
-                                   totalColumn = T){
+createGraphData <- function(df = intData,
+                            originVar,
+                            groupVar = "Edad",
+                            weigthVar = "ponde",
+                            totalColumn = T){
   require(tidyverse)
   graphData <- df %>% select(originVar, all_of(groupVar), all_of(weigthVar))
   graphData$y <- graphData[[originVar]]
@@ -33,12 +33,11 @@ createGraphData5option <- function(df = intData,
     summarise(val = list(prop.table(questionr::wtd.table(y, weights = ponde))*100)) %>%
     unnest_wider(val)
   totalData[[groupVar]] <- "Total"
-  #TODO: FIX THIS PART FOR MORE OPTIONS
-  totalData <- totalData %>%  pivot_longer(cols = starts_with("val"),
+  totalData <- totalData %>%  pivot_longer(cols = matches("\\d"),
                                            names_to = "Value",
                                            names_prefix = "val",
                                            values_to = "Porcentaje")
-  totalData$Value <- totalData$Value %>% factor(levels = c(1:5),
+  totalData$Value <- totalData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
                                                 labels = names(table(df[[originVar]])),
                                                 ordered = T)
 
@@ -47,13 +46,11 @@ createGraphData5option <- function(df = intData,
     summarise(graphData %>%
                 summarise(val = list(prop.table(questionr::wtd.table(y, weights = ponde))*100)) %>%
                 unnest_wider(val))%>%
-    #TODO: CHECK IF THIS IS NECESSARY:
-    pivot_longer(cols = starts_with("val"),
+    pivot_longer(cols = matches("\\d"),
                  names_to = "Value",
                  names_prefix = "val",
                  values_to = "Porcentaje")
-    #TODO: FIX THIS PART FOR LENGTH OF OPTIONS
-  graphData$Value <- graphData$Value %>% factor(levels = c(1:5),
+  graphData$Value <- graphData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
                                                 labels = names(table(df[[originVar]])),
                                                 ordered = T)
   if (totalColumn){
