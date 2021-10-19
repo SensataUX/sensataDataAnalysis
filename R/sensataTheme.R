@@ -40,7 +40,8 @@ theme_sensata <- function(base_size = 12, base_family = "sans") {
 #'
 #' @family colour fivethirtyeight
 #' @export
-#' @example inst/examples/ex-fivethirtyeight_pal.R
+# @example TBD
+# inst/examples/ex-fivethirtyeight_pal.R
 fivethirtyeight_pal <- function() {
   colors <- deframe(ggthemes::ggthemes_data[["fivethirtyeight"]])
   values <- unname(colors[c("Blue", "Red", "Green")])

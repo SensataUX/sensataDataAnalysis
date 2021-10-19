@@ -23,14 +23,16 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 License: MIT + file LICENSE
 Imports:
+    tidyverse,
     labelled,
     splitstackshape,
     jtools,
     interactions,
-    plyr,
     Hmisc, 
-    questionr
+    questionr,
+    showtext
 Suggests:
+    plyr,
     beepr,
     knitr,
     testthat (>= 3.0.0)
