@@ -9,5 +9,4 @@
 #'   \item{DV}{experimenta dependent variable}
 #' }
 #' @source Alimentación saludable filtered by Colombia and only people with the experiment
-#' @export
 "sensataExAnalysis"

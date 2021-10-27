@@ -28,9 +28,6 @@
 #' TBD
 #' @export
 
-# TODO: Arreglar nombres de identifiers cuando wide como lista de labels manual y de columna pregunta siempre
-# TODO: No sirve cuando cols = NULL
-
 
 createFreqTables <- function(df,
                              rows,
