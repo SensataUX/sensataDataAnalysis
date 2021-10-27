@@ -12,7 +12,7 @@ A data frame with 2831 rows and 86 variables:
 }
 }
 \source{
-Alimentación saludable filter for Colombia and only people with the experiment
+Alimentación saludable filtered by Colombia and only people with the experiment
 }
 \usage{
 sensataExAnalysis

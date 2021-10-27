@@ -8,5 +8,6 @@
 #'   \item{Group}{experimental group}
 #'   \item{DV}{experimenta dependent variable}
 #' }
-#' @source Alimentación saludable filter for Colombia and only people with the experiment
+#' @source Alimentación saludable filtered by Colombia and only people with the experiment
+#' @export
 "sensataExAnalysis"
