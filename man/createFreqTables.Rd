@@ -2,7 +2,7 @@
 % Please edit documentation in R/createFreqTables.R
 \name{createFreqTables}
 \alias{createFreqTables}
-\title{Function to create  crosstabulation tables}
+\title{Function to create  crosstabulation tables.}
 \usage{
 createFreqTables(
   df,
@@ -20,7 +20,7 @@ createFreqTables(
 
 \item{rows}{vector of variables that will be on the rows of the table}
 
-\item{cols}{vector of variables that will be on the cols of the table}
+\item{cols}{vector of variables that will be on the cols of the table, to create total tables set to NULL (default)}
 
 \item{weight}{variable that identifies weights}
 

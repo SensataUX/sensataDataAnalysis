@@ -2,7 +2,6 @@
 
 export(createFreqTables)
 export(createGraphData)
-export(createTotalTables)
 export(fivethirtyeight_pal)
 export(scale_color_fivethirtyeight)
 export(scale_colour_fivethirtyeight)
