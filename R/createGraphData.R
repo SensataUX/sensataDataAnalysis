@@ -30,7 +30,7 @@ createGraphData <- function(df = intData,
   graphData$y <- graphData[[originVar]]
   graphData <- na.omit(graphData)
   totalData <- graphData %>%
-    summarise(val = list(prop.table(questionr::wtd.table(y, weights = ponde))*100)) %>%
+    summarise(val = list(prop.table(questionr::wtd.table(y, weights = weigthVar))*100)) %>%
     unnest_wider(val)
   totalData[[groupVar]] <- "Total"
   totalData <- totalData %>%  pivot_longer(cols = matches("\\d"),
@@ -44,7 +44,7 @@ createGraphData <- function(df = intData,
   graphData <- graphData %>%
     group_by(across(all_of(groupVar)))  %>%
     summarise(graphData %>%
-                summarise(val = list(prop.table(questionr::wtd.table(y, weights = ponde))*100)) %>%
+                summarise(val = list(prop.table(questionr::wtd.table(y, weights = weigthVar))*100)) %>%
                 unnest_wider(val))%>%
     pivot_longer(cols = matches("\\d"),
                  names_to = "Value",
