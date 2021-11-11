@@ -37,9 +37,9 @@ createGraphData <- function(df = intData,
                                            names_to = "Value",
                                            names_prefix = "val",
                                            values_to = "Porcentaje")
-  totalData$Value <- totalData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
-                                                labels = names(table(df[[originVar]])),
-                                                ordered = T)
+  # totalData$Value <- totalData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
+  #                                               labels = names(table(df[[originVar]])),
+  #                                               ordered = T)
 
   graphData <- graphData %>%
     group_by(across(all_of(groupVar)))  %>%
@@ -50,9 +50,9 @@ createGraphData <- function(df = intData,
                  names_to = "Value",
                  names_prefix = "val",
                  values_to = "Porcentaje")
-  graphData$Value <- graphData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
-                                                labels = names(table(df[[originVar]])),
-                                                ordered = T)
+  # graphData$Value <- graphData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
+  #                                               labels = names(table(df[[originVar]])),
+  #                                               ordered = T)
   if (totalColumn){
     graphData <- bind_rows(graphData, totalData)
   }
