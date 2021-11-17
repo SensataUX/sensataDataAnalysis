@@ -1,4 +1,4 @@
-# TODO: UPDATE to work with tidyverse instead of plyr and document
+# TODO: UPDATE to work with tidyverse instead of plyr
 ## Summarizes data.
 ## Gives count, mean, standard deviation, standard error of the mean, and confidence interval (default 95%).
 ##   data: a data frame.
