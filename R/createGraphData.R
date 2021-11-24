@@ -25,7 +25,6 @@ createGraphData <- function(df = intData,
                             groupVar = "Edad",
                             weigthVar = "ponde",
                             totalColumn = T){
-  require(tidyverse)
   graphData <- df %>% select(originVar, all_of(groupVar), all_of(weigthVar))
   graphData$y <- graphData[[originVar]]
   graphData <- na.omit(graphData)
@@ -42,7 +41,7 @@ createGraphData <- function(df = intData,
   #                                               ordered = T)
 
   graphData <- graphData %>%
-    group_by(across(all_of(groupVar)))  %>%
+    group_by(all_of(groupVar))  %>%
     summarise(graphData %>%
                 summarise(val = list(prop.table(questionr::wtd.table(y, weights = weigthVar))*100)) %>%
                 unnest_wider(val))%>%
