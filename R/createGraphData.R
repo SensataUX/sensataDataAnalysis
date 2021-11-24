@@ -41,7 +41,7 @@ createGraphData <- function(df = intData,
   #                                               ordered = T)
 
   graphData <- graphData %>%
-    group_by(all_of(groupVar))  %>%
+    group_by(accross(all_of(groupVar)))  %>%
     summarise(graphData %>%
                 summarise(val = list(prop.table(questionr::wtd.table(y, weights = weigthVar))*100)) %>%
                 unnest_wider(val))%>%
