@@ -21,7 +21,9 @@ createGraphData(
 
 \item{totalColumn}{Should the total column be included in the data. Default: TRUE}
 
-\item{weightVar}{Weight variable. Default ponde}
+\item{nValues}{Number of values of originVar}
+
+\item{weightVar}{Weight variable. Default ponde,}
 }
 \value{
 Dataframe for graphs

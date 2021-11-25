@@ -7,8 +7,9 @@
 #'
 #' @param df default: intData
 #' @param originVar Variable to be graphed. Default intData
+#' @param nValues Number of values of originVar
 #' @param groupVar Variable to be grouped by. Defaul Edad
-#' @param weightVar Weight variable. Default ponde
+#' @param weightVar Weight variable. Default ponde,
 #' @param totalColumn Should the total column be included in the data. Default: TRUE
 #'
 #' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
@@ -25,35 +26,35 @@ createGraphData <- function(df = intData,
                             groupVar = "Edad",
                             weigthVar = "ponde",
                             totalColumn = T){
-  graphData <- df %>% select(originVar, all_of(groupVar), all_of(weigthVar))
-  graphData$y <- graphData[[originVar]]
-  graphData <- na.omit(graphData)
-  totalData <- graphData %>%
-    summarise(val = list(prop.table(questionr::wtd.table(y, weights = weigthVar))*100)) %>%
-    unnest_wider(val)
-  totalData[[groupVar]] <- "Total"
-  totalData <- totalData %>%  pivot_longer(cols = matches("\\d"),
-                                           names_to = "Value",
-                                           names_prefix = "val",
-                                           values_to = "Porcentaje")
-  # totalData$Value <- totalData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
-  #                                               labels = names(table(df[[originVar]])),
-  #                                               ordered = T)
 
-  graphData <- graphData %>%
-    group_by(across(all_of(groupVar)))  %>%
-    summarise(graphData %>%
-                summarise(val = list(prop.table(questionr::wtd.table(y, weights = weigthVar))*100)) %>%
-                unnest_wider(val))%>%
-    pivot_longer(cols = matches("\\d"),
-                 names_to = "Value",
-                 names_prefix = "val",
-                 values_to = "Porcentaje")
-  # graphData$Value <- graphData$Value %>% factor(levels = c(1:length(table(df[[originVar]]))),
-  #                                               labels = names(table(df[[originVar]])),
-  #                                               ordered = T)
-  if (totalColumn){
-    graphData <- bind_rows(graphData, totalData)
+  graphData <- df %>% select(all_of(originVar), all_of(groupVar), all_of(weigthVar))
+  graphData$y <- graphData[[originVar]]
+
+  if(is.factor(graphData[[originVar]])){
+    vals <- levels(graphData[[originVar]])
+  } else {
+    vals <- c(1:max(as.integer(factor(graphData[[originVar]]))))
   }
-  graphData
+  graphData <- na.omit(graphData)
+
+  valsData <- graphData %>%
+    group_by(across(all_of(groupVar)))  %>%
+    summarise(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
+              Value = vals)
+
+  valsData$Porcentaje <- as.double(valsData$Porcentaje)
+
+  valsData$Value <- valsData$Value %>% factor(levels = vals, ordered = T)
+
+  if (totalColumn){
+    totalData <- graphData %>%
+      summarise(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
+                Value = vals)
+    totalData[[groupVar]] <- "Total"
+
+    totalData$Porcentaje <- as.double(totalData$Porcentaje)
+    totalData$Value <- totalData$Value %>% factor(levels = vals, ordered = T)
+    outData <- bind_rows(valsData, totalData)
+  }
+  outData
 }
