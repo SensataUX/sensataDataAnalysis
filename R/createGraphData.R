@@ -28,12 +28,17 @@ createGraphData <- function(df = intData,
 
   graphData <- df %>% select(all_of(originVar), all_of(groupVar), all_of(weigthVar))
   graphData$y <- graphData[[originVar]]
-
+  if(is.null(weigthVar)){
+    graphData$ponde <- 1
+  } else {
+    graphData$ponde <- graphData[[weigthVar]]
+  }
   if(is.factor(graphData[[originVar]])){
     vals <- levels(graphData[[originVar]])
   } else {
     vals <- c(1:max(as.integer(factor(graphData[[originVar]]))))
   }
+
   graphData <- na.omit(graphData)
 
   valsData <- graphData %>%
