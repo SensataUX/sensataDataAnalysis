@@ -7,7 +7,6 @@
 #'
 #' @param df default: intData
 #' @param originVar Variable to be graphed. Default intData
-#' @param nValues Number of values of originVar
 #' @param groupVar Variable to be grouped by. Defaul Edad
 #' @param weightVar Weight variable. Default ponde,
 #' @param totalColumn Should the total column be included in the data. Default: TRUE
