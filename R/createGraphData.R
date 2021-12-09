@@ -59,6 +59,8 @@ createGraphData <- function(df = intData,
     totalData$Porcentaje <- as.double(totalData$Porcentaje)
     totalData$Value <- totalData$Value %>% factor(levels = vals, ordered = T)
     outData <- bind_rows(valsData, totalData)
+  } else {
+    outData <- valsData
   }
   outData
 }
