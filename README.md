@@ -18,8 +18,7 @@ sensata
 # install.packages("tidyverse")
 
 
-library(devtools)
-install_github(repo = "https://github.com/SensataUx/sensataDataAnalysis", ref = "main")
+devtools::install_github(repo = "https://github.com/SensataUx/sensataDataAnalysis", ref = "main", build_vignettes = T)
 ```
 
 ## Example
