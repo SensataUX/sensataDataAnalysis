@@ -27,6 +27,7 @@ Este paquete tiene las funciones necesarias para analizar los datos de sensata
 
 
 ``` r
+# install.packages("devtools")
 # install.packages("tidyverse")
 
 

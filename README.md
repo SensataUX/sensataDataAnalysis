@@ -14,6 +14,7 @@ sensata
 ## Installation
 
 ``` r
+# install.packages("devtools")
 # install.packages("tidyverse")
 
 
