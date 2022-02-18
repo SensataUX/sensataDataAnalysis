@@ -1,9 +1,9 @@
 # createFreqTables ---------------------------------------------------------------
-#Created by: Gabriel N. Camargo-Toledo
-#Modified by: Gabriel N. Camargo-Toledo
-#Modified on: Oct/27/2021
-#Contact: gcamargo@sensata.io
-#Sensata Asus VivoBook Pop!_OS 20.10 8gb Ram R4.0.4
+# Created by: Gabriel N. Camargo-Toledo
+# Modified by: Gabriel N. Camargo-Toledo
+# Modified on: Oct/27/2021
+# Contact: gcamargo@sensata.io
+# Sensata Asus VivoBook Pop!_OS 20.10 8gb Ram R4.0.4
 
 #' Function to create  crosstabulation tables.
 #'
@@ -23,6 +23,7 @@
 #' @return Df of frequency tables
 #' @keywords sensata microdata frequency tables analysis
 #' @import tidyverse
+#' @import sensataDataProg
 #'
 #' @examples
 #' TBD

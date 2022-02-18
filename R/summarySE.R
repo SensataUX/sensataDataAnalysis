@@ -23,6 +23,7 @@
 #' @return Dataframe for graphs
 #' @keywords sensata microdata metadata analysis summary-statistics
 #' @import tidyverse
+#' @import sensataDataProg
 #'
 #' @examples
 #' TBD

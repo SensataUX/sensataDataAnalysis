@@ -1,7 +1,7 @@
 Package: sensataDataAnalysis
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
   c(person(given = "Gabriel N.",
            family = "Camargo-Toledo",
@@ -30,7 +30,8 @@ Imports:
     jtools,
     interactions,
     Hmisc, 
-    questionr
+    questionr,
+    sensataDataProg
 Suggests:
     plyr,
     beepr,
