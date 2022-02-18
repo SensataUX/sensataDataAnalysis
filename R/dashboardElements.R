@@ -9,7 +9,7 @@
 #' Function to extend dictionary for tableau matrices
 #'
 #' This function creates a df with all frequency tables, weighted if necessary
-#' @param dict data cleaned and ready for analysis
+#' @param dict dictionary from dictGenerator
 #' @param questions vector of variables (question identifiers) that should be kept from the dictionary
 #' @param disag vector of variables (question identifiers) that will be on the cols of the tableau matrices, the disaggregations
 #' @param labels labels for the disag variables
@@ -103,4 +103,34 @@ createExtendedDict <- function(dict,
   }
 
   dict
+}
+
+# createDashboardMatrix ---------------------------------------------------------------
+# Created by: Gabriel N. Camargo-Toledo
+# Modified on: Feb/18/2022
+# Modified by: Gabriel N. Camargo-Toledo
+# Modified on: Feb/18/2022
+# Contact: gcamargo@sensata.io
+# Sensata Asus VivoBook Pop!_OS 21.10 8gb Ram R4.1.2
+
+#' Function to extend dictionary for tableau matrices
+#'
+#' This function creates a df with all frequency tables, weighted if necessary
+#' @param dict Extended dictionary from createExtendedDict
+#' @param df interim dataframe to create tables from
+#'
+#'
+#' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
+#' @return dashboard matrices
+#' @keywords sensata microdata tableau tables dictionary
+#' @import tidyverse
+#' @import sensataDataProg
+#'
+#' @examples
+#' TBD
+#' @export
+
+createDashboardMatrix <- function(dict,
+                                  df){
+  print("DO THIS!")
 }

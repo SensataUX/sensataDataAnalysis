@@ -3,7 +3,7 @@
 # Modified by: Gabriel N. Camargo-Toledo
 # Modified on: Oct/27/2021
 # Contact: gcamargo@sensata.io
-# Sensata Asus VivoBook Pop!_OS 20.10 8gb Ram R4.0.4
+# Sensata Asus VivoBook Pop!_OS 21.10 8gb Ram R4.1.2
 
 #' Function to create  crosstabulation tables.
 #'
@@ -45,7 +45,7 @@ createFreqTables <- function(df,
 
   # Forcing wide to FALSE if no cols ----------------------------------------
   if (is.null(cols) && wide){
-    rlang::inform("No columns supplied and wide parameter set to TRUE, this is not possible so set as FALSE")
+    rlang::inform("No columns supplied and wide parameter set to TRUE, this is not possible to set as FALSE")
     wide <- FALSE
   }
   # TODO: No sirve sin columns
