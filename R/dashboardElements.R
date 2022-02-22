@@ -180,23 +180,33 @@ createDashboardMatrix <- function(extDict,
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
-  perTab <- perTab %>% left_join(perTab, topicData, by = "Pregunta")
+  perTab <- left_join(perTab, topicData, by = "Pregunta")
   rm(topicData)
 
   # Create comments column
   if (("comments" %in% colnames(extDict))){
     commentsData <- extDict %>% select(Pregunta, comments)
-    perTab <- perTab %>% left_join(countTab, commentsData, by = "Pregunta")
+    perTab <- left_join(countTab, commentsData, by = "Pregunta")
     rm(commentsData)
   }
 
   # Create abbrev column
   if (("abbrev" %in% colnames(extDict))){
     abbrevData <- extDict %>% select(Pregunta, abbrev)
-    perTab <- perTab %>% left_join(countTab, abbrevData, by = "Pregunta")
+    perTab <- left_join(countTab, abbrevData, by = "Pregunta")
     rm(abbrevData)
   }
 
-  output <- list(countTab, perTab)
+  if(nrow(perTab) != nrow(countTab)){
+    rlang::abort("Rows of percent and count are not identical")
+  }
+
+  outputTab <- full_join(countTab, perTab)
+
+  if(nrow(outputTab) != nrow(countTab)){
+    rlang::abort("Joining of percent and count failed")
+  }
+
+  outputTab
 
 }
