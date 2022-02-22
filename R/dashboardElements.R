@@ -100,8 +100,6 @@ createExtendedDict <- function(dict,
   if (!is.null(abbrev)){
     dict$abbrev <- abbrev
   }
-  dict <- dict %>% rename("identificador" = "identifier",
-                          "pregunta" = "question")
 
   dict
 }
@@ -138,6 +136,7 @@ createDashboardMatrix <- function(extDict,
                                   weight = NULL,
                                   addIdentifier = FALSE,
                                   total = TRUE){
+  extDict <- extDict %>% rename("Pregunta" = "question")
 
   countTab <- createFreqTables(
     df = df,
