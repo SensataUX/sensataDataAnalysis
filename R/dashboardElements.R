@@ -155,14 +155,14 @@ createDashboardMatrix <- function(extDict,
   rm(topicData)
 
   # Create comments column
-  if (("comments" %in% colnames(dat))){
+  if (("comments" %in% colnames(extDict))){
     commentsData <- extDict %>% select(Pregunta, comments)
     countTab <- countTab %>% left_join(countTab, commentsData, by = "Pregunta")
     rm(commentsData)
   }
 
   # Create abbrev column
-  if (("abbrev" %in% colnames(dat))){
+  if (("abbrev" %in% colnames(extDict))){
     abbrevData <- extDict %>% select(Pregunta, abbrev)
     countTab <- countTab %>% left_join(countTab, abbrevData, by = "Pregunta")
     rm(abbrevData)
@@ -184,14 +184,14 @@ createDashboardMatrix <- function(extDict,
   rm(topicData)
 
   # Create comments column
-  if (("comments" %in% colnames(dat))){
+  if (("comments" %in% colnames(extDict))){
     commentsData <- extDict %>% select(Pregunta, comments)
     perTab <- perTab %>% left_join(countTab, commentsData, by = "Pregunta")
     rm(commentsData)
   }
 
   # Create abbrev column
-  if (("abbrev" %in% colnames(dat))){
+  if (("abbrev" %in% colnames(extDict))){
     abbrevData <- extDict %>% select(Pregunta, abbrev)
     perTab <- perTab %>% left_join(countTab, abbrevData, by = "Pregunta")
     rm(abbrevData)
