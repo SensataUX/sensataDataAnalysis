@@ -100,8 +100,8 @@ createExtendedDict <- function(dict,
   if (!is.null(abbrev)){
     dict$abbrev <- abbrev
   }
-  dict <- dict %>% rename("identifier" = "identificador",
-                          "question" = "pregunta")
+  dict <- dict %>% rename("identificador" = "identifier",
+                          "pregunta" = "question")
 
   dict
 }
