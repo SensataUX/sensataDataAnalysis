@@ -2,13 +2,13 @@
 # Created by: Gabriel N. Camargo-Toledo
 # Modified on: Feb/18/2022
 # Modified by: Gabriel N. Camargo-Toledo
-# Modified on: Feb/18/2022
+# Modified on: Feb/21/2022
 # Contact: gcamargo@sensata.io
 # Sensata Asus VivoBook Pop!_OS 21.10 8gb Ram R4.1.2
 
-#' Function to extend dictionary for tableau matrices
+#' Function to extend dictionary for dashboard matrices, like tableau
 #'
-#' This function creates a df with all frequency tables, weighted if necessary
+#' This function creates an extend dictionary with the info needed for a dashboard matrix
 #' @param dict dictionary from dictGenerator
 #' @param questions vector of variables (question identifiers) that should be kept from the dictionary
 #' @param disag vector of variables (question identifiers) that will be on the cols of the tableau matrices, the disaggregations
@@ -21,7 +21,6 @@
 #' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
 #' @return extended dictionary
 #' @keywords sensata microdata tableau tables dictionary
-#' @import tidyverse
 #' @import sensataDataProg
 #'
 #' @examples
@@ -101,6 +100,8 @@ createExtendedDict <- function(dict,
   if (!is.null(abbrev)){
     dict$abbrev <- abbrev
   }
+  dict <- dict %>% rename("identifier" = "identificador",
+                          "question" = "pregunta")
 
   dict
 }
@@ -109,28 +110,94 @@ createExtendedDict <- function(dict,
 # Created by: Gabriel N. Camargo-Toledo
 # Modified on: Feb/18/2022
 # Modified by: Gabriel N. Camargo-Toledo
-# Modified on: Feb/18/2022
+# Modified on: Feb/21/2022
 # Contact: gcamargo@sensata.io
 # Sensata Asus VivoBook Pop!_OS 21.10 8gb Ram R4.1.2
 
-#' Function to extend dictionary for tableau matrices
+#' Function to create dashboard matrices
 #'
 #' This function creates a df with all frequency tables, weighted if necessary
 #' @param dict Extended dictionary from createExtendedDict
 #' @param df interim dataframe to create tables from
+#' @param weight variable that identifies weights, default NULL
+#' @param addIdentifier logical, if TRUE column Pregunta will include identifiers.
+#' @param total logical, if TRUE includes total tables
 #'
 #'
 #' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
 #' @return dashboard matrices
 #' @keywords sensata microdata tableau tables dictionary
-#' @import tidyverse
 #' @import sensataDataProg
 #'
 #' @examples
 #' TBD
 #' @export
 
-createDashboardMatrix <- function(dict,
-                                  df){
-  print("DO THIS!")
+createDashboardMatrix <- function(extDict,
+                                  df,
+                                  weight = NULL,
+                                  addIdentifier = FALSE,
+                                  total = TRUE){
+
+  countTab <- createFreqTables(
+    df = df,
+    rows = extDict$identifier,
+    cols = extDict$identifier[extDict$disag],
+    weight = weight,
+    wide = F,
+    labels = extDict$labels[extDict$disag],
+    percent = F,
+    addIdentifier = addIdentifier
+  )
+
+  #create topic column
+  topicData <- extDict %>% select(question, topic)
+  countTab <- left_join(countTab, topicData, by = c("Pregunta","question"))
+  rm(topicData)
+
+  # Create comments column
+  if (!is.null(comments)){
+    commentsData <- extDict %>% select(question, comments)
+    countTab <- countTab %>% left_join(countTab, commentsData, by = c("Pregunta","question"))
+    rm(commentsData)
+  }
+
+  # Create abbrev column
+  if (!is.null(abbrev)){
+    abbrevData <- extDict %>% select(question, abbrev)
+    countTab <- countTab %>% left_join(countTab, abbrevData, by = c("Pregunta","question"))
+    rm(abbrevData)
+  }
+
+  perTab <- createFreqTables(
+    df = df,
+    rows = extDict$identifier,
+    cols = extDict$identifier[extDict$disag],
+    weight = weight,
+    wide = F,
+    labels = extDict$labels[extDict$disag],
+    percent = T
+  )
+
+  #create topic column
+  topicData <- extDict %>% select(question, topic)
+  perTab <- perTab %>% left_join(perTab, topicData, by = c("Pregunta","question"))
+  rm(topicData)
+
+  # Create comments column
+  if (!is.null(comments)){
+    commentsData <- extDict %>% select(question, comments)
+    perTab <- perTab %>% left_join(perTab, commentsData, by = c("Pregunta","question"))
+    rm(commentsData)
+  }
+
+  # Create abbrev column
+  if (!is.null(abbrev)){
+    abbrevData <- extDict %>% select(question, abbrev)
+    perTab <- perTab %>% left_join(perTab, abbrevData, by = c("Pregunta","question"))
+    rm(abbrevData)
+  }
+
+  output <- list(countTab, perTab)
+
 }

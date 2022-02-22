@@ -14,7 +14,6 @@
 #' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
 #' @return Dataframe for graphs
 #' @keywords sensata microdata metadata data-cleaning graphs
-#' @import tidyverse
 #' @import sensataDataProg
 #'
 #' @examples

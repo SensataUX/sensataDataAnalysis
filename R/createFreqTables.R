@@ -11,7 +11,7 @@
 #' @param df data cleaned and ready for analysis
 #' @param rows vector of variables that will be on the rows of the table
 #' @param cols vector of variables that will be on the cols of the table, to create total tables set to NULL (default)
-#' @param weight variable that identifies weights
+#' @param weight variable that identifies weights, default NULL
 #' @param wide logical, if TRUE expand for each value in cols
 #' @param labels vector of labels for cols
 #' @param percent logical, if TRUE table will have percentage instead of count

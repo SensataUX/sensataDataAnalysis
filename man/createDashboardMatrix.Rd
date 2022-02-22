@@ -2,14 +2,26 @@
 % Please edit documentation in R/dashboardElements.R
 \name{createDashboardMatrix}
 \alias{createDashboardMatrix}
-\title{Function to extend dictionary for tableau matrices}
+\title{Function to create dashboard matrices}
 \usage{
-createDashboardMatrix(dict, df)
+createDashboardMatrix(
+  extDict,
+  df,
+  weight = NULL,
+  addIdentifier = FALSE,
+  total = TRUE
+)
 }
 \arguments{
-\item{dict}{Extended dictionary from createExtendedDict}
-
 \item{df}{interim dataframe to create tables from}
+
+\item{weight}{variable that identifies weights, default NULL}
+
+\item{addIdentifier}{logical, if TRUE column Pregunta will include identifiers.}
+
+\item{total}{logical, if TRUE includes total tables}
+
+\item{dict}{Extended dictionary from createExtendedDict}
 }
 \value{
 dashboard matrices

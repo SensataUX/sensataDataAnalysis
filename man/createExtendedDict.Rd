@@ -2,7 +2,7 @@
 % Please edit documentation in R/dashboardElements.R
 \name{createExtendedDict}
 \alias{createExtendedDict}
-\title{Function to extend dictionary for tableau matrices}
+\title{Function to extend dictionary for dashboard matrices, like tableau}
 \usage{
 createExtendedDict(
   dict,
@@ -33,7 +33,7 @@ createExtendedDict(
 extended dictionary
 }
 \description{
-This function creates a df with all frequency tables, weighted if necessary
+This function creates an extend dictionary with the info needed for a dashboard matrix
 }
 \examples{
 rawData <- sensataDataProg::sensataExample

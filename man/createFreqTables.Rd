@@ -22,7 +22,7 @@ createFreqTables(
 
 \item{cols}{vector of variables that will be on the cols of the table, to create total tables set to NULL (default)}
 
-\item{weight}{variable that identifies weights}
+\item{weight}{variable that identifies weights, default NULL}
 
 \item{wide}{logical, if TRUE expand for each value in cols}
 
