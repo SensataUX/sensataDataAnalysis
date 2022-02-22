@@ -150,21 +150,21 @@ createDashboardMatrix <- function(extDict,
   )
 
   #create topic column
-  topicData <- extDict %>% select(question, topic)
-  countTab <- left_join(countTab, topicData, by = c("Pregunta","question"))
+  topicData <- extDict %>% select(Pregunta, topic)
+  countTab <- left_join(countTab, topicData, by = "Pregunta")
   rm(topicData)
 
   # Create comments column
-  if (!is.null(comments)){
-    commentsData <- extDict %>% select(question, comments)
-    countTab <- countTab %>% left_join(countTab, commentsData, by = c("Pregunta","question"))
+  if (("comments" %in% colnames(dat))){
+    commentsData <- extDict %>% select(Pregunta, comments)
+    countTab <- countTab %>% left_join(countTab, commentsData, by = "Pregunta")
     rm(commentsData)
   }
 
   # Create abbrev column
-  if (!is.null(abbrev)){
-    abbrevData <- extDict %>% select(question, abbrev)
-    countTab <- countTab %>% left_join(countTab, abbrevData, by = c("Pregunta","question"))
+  if (("abbrev" %in% colnames(dat))){
+    abbrevData <- extDict %>% select(Pregunta, abbrev)
+    countTab <- countTab %>% left_join(countTab, abbrevData, by = "Pregunta")
     rm(abbrevData)
   }
 
@@ -179,21 +179,21 @@ createDashboardMatrix <- function(extDict,
   )
 
   #create topic column
-  topicData <- extDict %>% select(question, topic)
-  perTab <- perTab %>% left_join(perTab, topicData, by = c("Pregunta","question"))
+  topicData <- extDict %>% select(Pregunta, topic)
+  perTab <- perTab %>% left_join(perTab, topicData, by = "Pregunta")
   rm(topicData)
 
   # Create comments column
-  if (!is.null(comments)){
-    commentsData <- extDict %>% select(question, comments)
-    perTab <- perTab %>% left_join(perTab, commentsData, by = c("Pregunta","question"))
+  if (("comments" %in% colnames(dat))){
+    commentsData <- extDict %>% select(Pregunta, comments)
+    perTab <- perTab %>% left_join(countTab, commentsData, by = "Pregunta")
     rm(commentsData)
   }
 
   # Create abbrev column
-  if (!is.null(abbrev)){
-    abbrevData <- extDict %>% select(question, abbrev)
-    perTab <- perTab %>% left_join(perTab, abbrevData, by = c("Pregunta","question"))
+  if (("abbrev" %in% colnames(dat))){
+    abbrevData <- extDict %>% select(Pregunta, abbrev)
+    perTab <- perTab %>% left_join(countTab, abbrevData, by = "Pregunta")
     rm(abbrevData)
   }
 
