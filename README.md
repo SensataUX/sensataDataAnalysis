@@ -21,6 +21,15 @@ sensata
 devtools::install_github(repo = "https://github.com/SensataUx/sensataDataAnalysis", ref = "main", build_vignettes = T)
 ```
 
+## Basic guide
+
+Con estos comandos pueden acceder a una guía básica de R y de este
+paquete
+
+``` r
+vignette("basicGuide", package = "sensataDataAnalysis")
+```
+
 ## Example
 
 TODO: Create example
