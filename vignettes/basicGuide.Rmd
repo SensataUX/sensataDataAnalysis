@@ -57,7 +57,7 @@ Rstudio es una interfaz gráfica de desarrollo que hace que usar el lenguaje R s
 
 (Trucos para ver el historial, para ver el ambiente, ver las gráficas, etc)
 
-## Primer paso, paquete, cargar fuentes y decisiones estéticas
+## Setup, paquete, cargar fuentes y decisiones estéticas
 
 Al abrir Rstudio (o R) se carga solo la funcionalidad básica. Para utilizar las funciones sensata necesitamos instalar y cargar el paquete *sensataDataAnalysis*. Para instalar el paquete de github hay que instalar antes otro paquete, *devtools* y suele evitar problemas si instalamos antes el *tidyverse*:
 
@@ -91,25 +91,20 @@ movPaleta5 <- c("#003f5c",
                "#ffa600")
 
 # Decisiones sobre estética de las gráficas
-theme_sensata <-   theme(text = element_text(family = "Open Sans", size = 22),
-                         axis.title = element_text(colour = "dimgray", size = 20),
-                         axis.text.x = element_text(angle = 0,
-                                                    vjust = 0.5,
-                                                    hjust = 0.5,
-                                                    size = 18,
+theme_sensata <-   theme(text = element_text(family = "Open Sans"),
+                         axis.title = element_text(colour = "dimgray"),
+                         axis.text.x = element_text(angle = 20,
+                                                    vjust = 1,
+                                                    hjust = 1,
                                                     colour = "dimgray"),
-                         axis.text.y = element_text(size = 18,
-                                                    colour = "dimgray"),
-                         legend.text = element_text(size = 16,
-                                                    colour = "dimgray"),
+                         axis.text.y = element_text(colour = "dimgray"),
+                         legend.text = element_text(colour = "dimgray"),
                          legend.title = element_text(colour = "dimgray"),
                          plot.title = element_text(family = "Montserrat", 
-                                                   colour = "black",
-                                                   size = 26, 
+                                                   colour = "black", 
                                                    lineheight=.5),
                          plot.caption = element_text(colour = "dimgray"),
-                         plot.subtitle = element_text(family = "Montserrat",
-                                                      size = 18),
+                         plot.subtitle = element_text(family = "Montserrat"),
                          panel.background = element_rect(size = 0, fill = "white"),
                          panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                                          colour = "gray85"),
@@ -141,10 +136,10 @@ graphData
 
 ## Tercer paso, crear la gráfica
 
-Para crear la gráfica vamos a usar ggplot
+Para crear la gráfica vamos a usar ggplot. 
 
 
-```{r createGraph}
+```{r createGraph, out.width="400px", out.height="200px"}
 p <- ggplot(graphData, aes(x=q_EA_CA_10, y=Porcentaje)) 
 g <- geom_col(aes(fill=Value),  width = 0.4)
 
