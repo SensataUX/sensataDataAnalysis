@@ -70,7 +70,7 @@ tabFreq <- createFreqTables(df = legoIntDataSinSal,
                                      "PREGUNTA 2" = "TEMA 1",
                                      "PREGUNTA 3" = "TEMA 2",
                                      "PREGUNTA 4" = "TEMA 2"
-                                     ...),
+                                     ),
                             addIdentifier = T,
                             wide = T)
 
