@@ -198,10 +198,13 @@ createDashboardMatrix <- function(extDict,
   }
 
   if(nrow(perTab) != nrow(countTab)){
-    rlang::abort("Rows of percent and count are not identical")
+    rlang::warn("Rows of percent and count are not identical")
+    outputTab <- list(countTab, perTab)
+  } else {
+    outputTab <- full_join(countTab, perTab)
   }
 
-  outputTab <- full_join(countTab, perTab)
+
 
   if(nrow(outputTab) != nrow(countTab)){
     rlang::abort("Joining of percent and count failed")
