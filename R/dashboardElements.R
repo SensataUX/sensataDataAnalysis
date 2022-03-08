@@ -206,8 +206,8 @@ createDashboardMatrix <- function(extDict,
 
 
 
-  if(nrow(outputTab) != nrow(countTab)){
-    rlang::abort("Joining of percent and count failed")
+  if(nrow(perTab) != nrow(countTab)){
+    rlang::warn("Joining of percent and count failed")
   }
 
   outputTab
