@@ -202,6 +202,7 @@ createDashboardMatrix <- function(extDict,
     outputTab <- list(countTab, perTab)
   } else {
     outputTab <- full_join(countTab, perTab)
+    outputTab <- outputTab %>% relocate("%", .after = "Freq")
   }
 
 
