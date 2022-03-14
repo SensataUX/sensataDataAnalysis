@@ -196,7 +196,7 @@ createDashboardMatrix <- function(extDict,
     wide = F,
     percent = T
   )
-  perTotTab <- perTotTab %>% rename("Total" = "%")
+  perTotTab <- perTotTab %>% rename("% Total" = "%")
   perTab <- perTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
   rm(perTotTab)
 
