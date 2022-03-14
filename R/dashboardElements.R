@@ -158,7 +158,8 @@ createDashboardMatrix <- function(extDict,
     addIdentifier = addIdentifier
   )
   countTotTab <- countTotTab %>% rename("Total" = "Freq")
-  countTab <- countTab %>% full_join(countTotTab, by = "Pregunta")
+  countTab <- countTab %>% full_join(countTotTab, by = c("Pregunta", "Respuesta"))
+  rm(countTotTab)
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
@@ -196,7 +197,8 @@ createDashboardMatrix <- function(extDict,
     percent = T
   )
   perTotTab <- perTotTab %>% rename("Total" = "%")
-  perTab <- perTab %>% full_join(perTotTab, by = "Pregunta")
+  perTab <- perTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
+  rm(perTotTab)
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
