@@ -148,6 +148,17 @@ createDashboardMatrix <- function(extDict,
     percent = F,
     addIdentifier = addIdentifier
   )
+  #Total
+  countTotTab <- createFreqTables(
+    df = df,
+    rows = extDict$identifier,
+    weight = weight,
+    wide = F,
+    percent = F,
+    addIdentifier = addIdentifier
+  )
+  countTotTab <- countTotTab %>% rename("Total" = "Freq")
+  countTab <- countTab %>% full_join(countTotTab, by = "Pregunta")
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
@@ -177,6 +188,15 @@ createDashboardMatrix <- function(extDict,
     labels = extDict$labels[extDict$disag],
     percent = T
   )
+  perTotTab <- createFreqTables(
+    df = df,
+    rows = extDict$identifier,
+    weight = weight,
+    wide = F,
+    percent = T
+  )
+  perTotTab <- perTotTab %>% rename("Total" = "%")
+  perTab <- perTab %>% full_join(perTotTab, by = "Pregunta")
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
