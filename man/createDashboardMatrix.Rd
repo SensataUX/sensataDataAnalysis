@@ -9,7 +9,7 @@ createDashboardMatrix(
   df,
   weight = NULL,
   addIdentifier = FALSE,
-  total = TRUE
+  totals = TRUE
 )
 }
 \arguments{
@@ -19,7 +19,7 @@ createDashboardMatrix(
 
 \item{addIdentifier}{logical, if TRUE column Pregunta will include identifiers.}
 
-\item{total}{logical, if TRUE includes total tables}
+\item{totals}{logical, if TRUE includes total tables in a different list}
 
 \item{dict}{Extended dictionary from createExtendedDict}
 }

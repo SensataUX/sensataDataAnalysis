@@ -119,7 +119,7 @@ createExtendedDict <- function(dict,
 #' @param df interim dataframe to create tables from
 #' @param weight variable that identifies weights, default NULL
 #' @param addIdentifier logical, if TRUE column Pregunta will include identifiers.
-#' @param total logical, if TRUE includes total tables
+#' @param totals logical, if TRUE includes total tables in a different list
 #'
 #'
 #' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
@@ -135,7 +135,7 @@ createDashboardMatrix <- function(extDict,
                                   df,
                                   weight = NULL,
                                   addIdentifier = FALSE,
-                                  total = TRUE){
+                                  totals = TRUE){
   extDict <- extDict %>% rename("Pregunta" = "question")
 
   countTab <- createFreqTables(
@@ -148,18 +148,6 @@ createDashboardMatrix <- function(extDict,
     percent = F,
     addIdentifier = addIdentifier
   )
-  #Total
-  countTotTab <- createFreqTables(
-    df = df,
-    rows = extDict$identifier,
-    weight = weight,
-    wide = F,
-    percent = F,
-    addIdentifier = addIdentifier
-  )
-  countTotTab <- countTotTab %>% rename("Total" = "Freq")
-  countTab <- countTab %>% full_join(countTotTab, by = c("Pregunta", "Respuesta"))
-  rm(countTotTab)
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
@@ -190,18 +178,7 @@ createDashboardMatrix <- function(extDict,
     percent = T
   )
   perTab$`%` %>% str_remove("%") %>% as.double()
-  perTotTab <- createFreqTables(
-    df = df,
-    rows = extDict$identifier,
-    weight = weight,
-    wide = F,
-    percent = T
-  )
-  perTotTab <- perTotTab %>% rename("% Total" = "%")
-  perTotTab$`% Total` %>% str_remove("%") %>% as.double()
 
-  perTab <- perTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
-  rm(perTotTab)
 
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
@@ -228,6 +205,38 @@ createDashboardMatrix <- function(extDict,
   } else {
     outputTab <- full_join(countTab, perTab)
     outputTab <- outputTab %>% relocate("%", .after = "Freq")
+  }
+
+  if(totals == T){
+    # Total count
+    countTotTab <- createFreqTables(
+      df = df,
+      rows = extDict$identifier,
+      weight = weight,
+      wide = F,
+      percent = F,
+      addIdentifier = addIdentifier
+    )
+    countTotTab <- countTotTab %>% rename("Total" = "Freq")
+
+    # Total %
+    perTotTab <- createFreqTables(
+      df = df,
+      rows = extDict$identifier,
+      weight = weight,
+      wide = F,
+      percent = T
+    )
+    perTotTab <- perTotTab %>% rename("% Total" = "%")
+    perTotTab$`% Total` %>% str_remove("%") %>% as.double()
+
+    totTab <- countTotTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
+
+    rm(countTotTab)
+    rm(perTotTab)
+
+    rlang::warn("Totals as totTab in list")
+    outputTab <- list(outputTab, totTab)
   }
 
 

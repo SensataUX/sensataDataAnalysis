@@ -17,8 +17,7 @@ Description: This package has the functions regularly used for our data analysis
     Creating weights, creating graphs, cluster analysis, linear regression, conjoint analysis.
 Depends:
     R (>= 4.0.0),
-    sensataDataProg (1.0.0
-    ),
+    sensataDataProg,
     tidyverse (>= 1.3.0),
     labelled (>= 2.7.0),
     showtext (>= 0.9)
