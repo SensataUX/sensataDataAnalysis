@@ -201,7 +201,7 @@ createDashboardMatrix <- function(extDict,
 
   if(nrow(perTab) != nrow(countTab)){
     rlang::warn("Rows of percent and count are not identical")
-    outputTab <- list(countTab, perTab)
+    outputTab <- list(countTab = countTab, perTab = perTab)
   } else {
     outputTab <- full_join(countTab, perTab)
     outputTab <- outputTab %>% relocate("%", .after = "Freq")
@@ -236,7 +236,7 @@ createDashboardMatrix <- function(extDict,
     rm(perTotTab)
 
     rlang::warn("Totals as totTab in list")
-    outputTab <- list(outputTab, totTab)
+    outputTab <- list(outputTab = outputTab, totTab = totTab)
   }
 
 
