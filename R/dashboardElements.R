@@ -218,6 +218,7 @@ createDashboardMatrix <- function(extDict,
       addIdentifier = addIdentifier
     )
     countTotTab <- countTotTab %>% rename("Total" = "Freq")
+    countTotTab$`%` %>% str_remove("%") %>% as.double()
 
     # Total %
     perTotTab <- createFreqTables(
