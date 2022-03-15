@@ -189,6 +189,7 @@ createDashboardMatrix <- function(extDict,
     labels = extDict$labels[extDict$disag],
     percent = T
   )
+  perTab$`%` %>% str_remove("%") %>% as.double()
   perTotTab <- createFreqTables(
     df = df,
     rows = extDict$identifier,
@@ -197,6 +198,8 @@ createDashboardMatrix <- function(extDict,
     percent = T
   )
   perTotTab <- perTotTab %>% rename("% Total" = "%")
+  perTotTab$`% Total` %>% str_remove("%") %>% as.double()
+
   perTab <- perTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
   rm(perTotTab)
 
