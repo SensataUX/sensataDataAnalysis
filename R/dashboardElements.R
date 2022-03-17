@@ -219,6 +219,24 @@ createDashboardMatrix <- function(extDict,
     )
     # countTotTab <- countTotTab %>% rename("Total" = "Freq")
     countTotTab$`%` %>% str_remove("%") %>% as.double()
+    #create topic column
+    topicData <- extDict %>% select(Pregunta, topic)
+    countTotTab <- countTotTab %>% left_join(topicData, by = "Pregunta")
+    rm(topicData)
+
+    # Create comments column
+    if (("comments" %in% colnames(extDict))){
+      commentsData <- extDict %>% select(Pregunta, comments)
+      countTotTab <- countTotTab %>% left_join(commentsData, by = "Pregunta")
+      rm(commentsData)
+    }
+
+    # Create abbrev column
+    if (("abbrev" %in% colnames(extDict))){
+      abbrevData <- extDict %>% select(Pregunta, abbrev)
+      countTotTab <- countTotTab %>% left_join(abbrevData, by = "Pregunta")
+      rm(abbrevData)
+    }
 
     # Total %
     perTotTab <- createFreqTables(
@@ -230,11 +248,30 @@ createDashboardMatrix <- function(extDict,
     )
     # perTotTab <- perTotTab %>% rename("% Total" = "%")
     perTotTab$`% Total` %>% str_remove("%") %>% as.double() #TODO: Porqué esta linea no funciona?
+    #create topic column
+    topicData <- extDict %>% select(Pregunta, topic)
+    perTotTab <- perTotTab %>% left_join(topicData, by = "Pregunta")
+    rm(topicData)
+
+    # Create comments column
+    if (("comments" %in% colnames(extDict))){
+      commentsData <- extDict %>% select(Pregunta, comments)
+      perTotTab <- perTotTab %>% left_join(commentsData, by = "Pregunta")
+      rm(commentsData)
+    }
+
+    # Create abbrev column
+    if (("abbrev" %in% colnames(extDict))){
+      abbrevData <- extDict %>% select(Pregunta, abbrev)
+      perTotTab <- perTotTab %>% left_join(abbrevData, by = "Pregunta")
+      rm(abbrevData)
+    }
 
     totTab <- countTotTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
 
     rm(countTotTab)
     rm(perTotTab)
+
 
     rlang::warn("Totals as totTab in list")
     outputTab <- list(outputTab = outputTab, totTab = totTab)
