@@ -217,7 +217,7 @@ createDashboardMatrix <- function(extDict,
       percent = F,
       addIdentifier = addIdentifier
     )
-    countTotTab <- countTotTab %>% rename("Total" = "Freq")
+    # countTotTab <- countTotTab %>% rename("Total" = "Freq")
     countTotTab$`%` %>% str_remove("%") %>% as.double()
 
     # Total %
@@ -228,8 +228,8 @@ createDashboardMatrix <- function(extDict,
       wide = F,
       percent = T
     )
-    perTotTab <- perTotTab %>% rename("% Total" = "%")
-    perTotTab$`% Total` %>% str_remove("%") %>% as.double()
+    # perTotTab <- perTotTab %>% rename("% Total" = "%")
+    perTotTab$`% Total` %>% str_remove("%") %>% as.double() #TODO: Porqué esta linea no funciona?
 
     totTab <- countTotTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
 
