@@ -119,7 +119,7 @@ createExtendedDict <- function(dict,
 #' @param df interim dataframe to create tables from
 #' @param weight variable that identifies weights, default NULL
 #' @param addIdentifier logical, if TRUE column Pregunta will include identifiers.
-#' @param totals logical, if TRUE includes total tables in a different list
+#' @param totals logical, if TRUE includes total tables at the end of matrix
 #'
 #'
 #' @author Gabriel N. Camargo-Toledo \email{gcamargo@@sensata.io}
@@ -152,20 +152,17 @@ createDashboardMatrix <- function(extDict,
   #create topic column
   topicData <- extDict %>% select(Pregunta, topic)
   countTab <- countTab %>% left_join(topicData, by = "Pregunta")
-  rm(topicData)
 
   # Create comments column
   if (("comments" %in% colnames(extDict))){
     commentsData <- extDict %>% select(Pregunta, comments)
     countTab <- countTab %>% left_join(commentsData, by = "Pregunta")
-    rm(commentsData)
   }
 
   # Create abbrev column
   if (("abbrev" %in% colnames(extDict))){
     abbrevData <- extDict %>% select(Pregunta, abbrev)
     countTab <- countTab %>% left_join(abbrevData, by = "Pregunta")
-    rm(abbrevData)
   }
 
   perTab <- createFreqTables(
@@ -181,22 +178,16 @@ createDashboardMatrix <- function(extDict,
 
 
   #create topic column
-  topicData <- extDict %>% select(Pregunta, topic)
   perTab <- perTab %>% left_join(topicData, by = "Pregunta")
-  rm(topicData)
 
   # Create comments column
   if (("comments" %in% colnames(extDict))){
-    commentsData <- extDict %>% select(Pregunta, comments)
     perTab <- perTab %>% left_join(commentsData, by = "Pregunta")
-    rm(commentsData)
   }
 
   # Create abbrev column
   if (("abbrev" %in% colnames(extDict))){
-    abbrevData <- extDict %>% select(Pregunta, abbrev)
     perTab <- perTab %>% left_join(abbrevData, by = "Pregunta")
-    rm(abbrevData)
   }
 
   if(nrow(perTab) != nrow(countTab)){
@@ -220,22 +211,16 @@ createDashboardMatrix <- function(extDict,
     # countTotTab <- countTotTab %>% rename("Total" = "Freq")
     countTotTab$`%` %>% str_remove("%") %>% as.double()
     #create topic column
-    topicData <- extDict %>% select(Pregunta, topic)
     countTotTab <- countTotTab %>% left_join(topicData, by = "Pregunta")
-    rm(topicData)
 
     # Create comments column
     if (("comments" %in% colnames(extDict))){
-      commentsData <- extDict %>% select(Pregunta, comments)
       countTotTab <- countTotTab %>% left_join(commentsData, by = "Pregunta")
-      rm(commentsData)
     }
 
     # Create abbrev column
     if (("abbrev" %in% colnames(extDict))){
-      abbrevData <- extDict %>% select(Pregunta, abbrev)
       countTotTab <- countTotTab %>% left_join(abbrevData, by = "Pregunta")
-      rm(abbrevData)
     }
 
     # Total %
@@ -249,32 +234,27 @@ createDashboardMatrix <- function(extDict,
     # perTotTab <- perTotTab %>% rename("% Total" = "%")
     perTotTab$`% Total` %>% str_remove("%") %>% as.double() #TODO: Porqué esta linea no funciona?
     #create topic column
-    topicData <- extDict %>% select(Pregunta, topic)
     perTotTab <- perTotTab %>% left_join(topicData, by = "Pregunta")
-    rm(topicData)
 
     # Create comments column
     if (("comments" %in% colnames(extDict))){
-      commentsData <- extDict %>% select(Pregunta, comments)
       perTotTab <- perTotTab %>% left_join(commentsData, by = "Pregunta")
-      rm(commentsData)
     }
 
     # Create abbrev column
     if (("abbrev" %in% colnames(extDict))){
-      abbrevData <- extDict %>% select(Pregunta, abbrev)
       perTotTab <- perTotTab %>% left_join(abbrevData, by = "Pregunta")
-      rm(abbrevData)
     }
 
-    totTab <- countTotTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta"))
+    totTab <- countTotTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta", "topic", "comments"))
 
-    rm(countTotTab)
-    rm(perTotTab)
+    #create Output tab
+    totTab$VarCruce <- "Total"
+    totTab$Cruce <- "Total"
+    outputTab <- outputTab %>% bind_rows(totTab)
 
+    rlang::warn("Included totals at the end of matrix")
 
-    rlang::warn("Totals as totTab in list")
-    outputTab <- list(outputTab = outputTab, totTab = totTab)
   }
 
 

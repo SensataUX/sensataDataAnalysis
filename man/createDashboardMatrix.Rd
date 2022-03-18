@@ -19,7 +19,7 @@ createDashboardMatrix(
 
 \item{addIdentifier}{logical, if TRUE column Pregunta will include identifiers.}
 
-\item{totals}{logical, if TRUE includes total tables in a different list}
+\item{totals}{logical, if TRUE includes total tables at the end of matrix}
 
 \item{dict}{Extended dictionary from createExtendedDict}
 }
