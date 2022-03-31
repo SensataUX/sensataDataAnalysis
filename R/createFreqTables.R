@@ -43,12 +43,17 @@ createFreqTables <- function(df,
   require(tidyverse)
   require(questionr)
 
+
+  # droplevels --------------------------------------------------------------
+  varLab <- labelled::var_label(df)
+  df <- droplevels(df)
+  labelled::var_label(df) <- varLab
+
   # Forcing wide to FALSE if no cols ----------------------------------------
   if (is.null(cols) && wide){
     rlang::inform("No columns supplied and wide parameter set to TRUE, this is not possible to set as FALSE")
     wide <- FALSE
   }
-  # TODO: No sirve sin columns
   # Creating objects --------------------------------------------------------
   tab <- list()
   total <- list()
