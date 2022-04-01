@@ -43,11 +43,6 @@ createFreqTables <- function(df,
   require(tidyverse)
   require(questionr)
 
-  # inform if no weights given ---------------------------------------------
-  if(is.null(weight)){
-    rlang::inform("No weight given, so uniform weights assumed")
-  }
-
 
   # droplevels --------------------------------------------------------------
   varLab <- labelled::var_label(df)
@@ -189,6 +184,16 @@ createFreqTables <- function(df,
   if (length(cols)!=length(labels) && !is.null(cols)) {
     rlang::inform("Labels not supplied or different length than cols. Used identifier instead")
   }
+
+  # inform if no weights given ---------------------------------------------
+  if(is.null(weight)){
+    rlang::inform("-----------------------------------------------------------
+                  ATTENTION:
+                  No weights given, so uniform weights assumed
+                  ------------------------------------------------------------")
+  }
+
+
   return(tab)
 }
 
