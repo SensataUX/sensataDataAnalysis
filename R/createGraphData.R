@@ -23,15 +23,15 @@
 createGraphData <- function(df = intData,
                             originVar,
                             groupVar = "Edad",
-                            weigthVar = "ponde",
+                            weightVar = "ponde",
                             totalColumn = T){
 
-  graphData <- df %>% select(all_of(originVar), all_of(groupVar), all_of(weigthVar))
+  graphData <- df %>% select(all_of(originVar), all_of(groupVar), all_of(weightVar))
   graphData$y <- graphData[[originVar]]
-  if(is.null(weigthVar)){
+  if(is.null(weightVar)){
     graphData$ponde <- 1
   } else {
-    graphData$ponde <- graphData[[weigthVar]]
+    graphData$ponde <- graphData[[weightVar]]
   }
   if(is.factor(graphData[[originVar]])){
     vals <- levels(graphData[[originVar]])
