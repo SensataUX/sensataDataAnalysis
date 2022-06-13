@@ -52,6 +52,7 @@ createGraphData <- function(df = intData,
 
   if (totalColumn){
     totalData <- graphData %>%
+      ungroup() %>%
       summarise(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
                 Value = vals)
     totalData[[groupVar]] <- "Total"
