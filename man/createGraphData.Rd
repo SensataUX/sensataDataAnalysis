@@ -8,7 +8,7 @@ createGraphData(
   df = intData,
   originVar,
   groupVar = "Edad",
-  weigthVar = "ponde",
+  weightVar = "ponde",
   totalColumn = T
 )
 }
@@ -19,9 +19,9 @@ createGraphData(
 
 \item{groupVar}{Variable to be grouped by. Defaul Edad}
 
-\item{totalColumn}{Should the total column be included in the data. Default: TRUE}
-
 \item{weightVar}{Weight variable. Default ponde,}
+
+\item{totalColumn}{Should the total column be included in the data. Default: TRUE}
 }
 \value{
 Dataframe for graphs
