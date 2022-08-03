@@ -32,7 +32,7 @@ sensitivityMnl <- function(model, attrib, base.data, competitor.data){
     for(i in attrib[[a]]){
       data[1,] <- base.data
       data[1,a] <- i
-      share <- c(share, predict.mnl(model,data)[1 ,1])
+      share <- c(share, predictMnl(model,data)[1 ,1])
     }
   }
   data.frame(level = unlist(attrib), share = share , increase = share-base.share)
