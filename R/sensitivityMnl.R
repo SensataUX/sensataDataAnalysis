@@ -26,7 +26,7 @@
 
 sensitivityMnl <- function(model, attrib, base.data, competitor.data){
   data <- rbind(base.data , competitor.data)
-  base.share <- predict.mnl(model,data)[1,1]
+  base.share <- predictMnl(model,data)[1,1]
   share <- NULL
   for(a in seq_along(attrib)){
     for(i in attrib[[a]]){
