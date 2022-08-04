@@ -8,12 +8,12 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "figures",
   out.width = "100%"
 )
 ```
 
-# sensataDataAnalysis <img src="man/figures/sensata-small-logo-512x512.png" align="right" width="120" />
+# sensataDataAnalysis <img src="figures/sensata-small-logo-512x512.png" align="right" width="120" />
 
 <!-- badges: start -->
 <!-- badges: end -->

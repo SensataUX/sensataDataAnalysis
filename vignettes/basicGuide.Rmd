@@ -27,7 +27,7 @@ rawQ0DataExample <- sensataDataProg::sensataExample %>% select(contains(".q0."))
 sensataExAnalysis <- sensataDataAnalysis::sensataExAnalysis
 ```
 
-# Introducción a sensata Data Framework <img src="../man/figures/sensata-small-logo-512x512.png" align="right" width="120" />
+# Introducción a sensata Data Framework <img src="../figures/sensata-small-logo-512x512.png" align="right" width="120" />
 
 Este documento presenta una guía de los paquetes de R utilizados para preparar, limpiar y analizar los datos de encuestas recolectados con la plataforma Sensata. Para eso tenemos una serie de paquetes que preparan los datos y ayudan a hacer más sencillo y uniforme los análisis.
 
