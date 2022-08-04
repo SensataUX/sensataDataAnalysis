@@ -1,7 +1,7 @@
 Intro a R y SensataDataAnalysis
 ================
 Gabriel N. Camargo-Toledo
-11/02/2022
+04/08/2022
 
 # Introducción a sensata Data Framework
 
@@ -20,39 +20,43 @@ rawMetaDataExample
 ```
 
     ## # A tibble: 6 × 19
-    ##   `_id`                 createdAt           surveyId surveyName params.utm_sour…
-    ##   <chr>                 <dttm>              <chr>    <chr>      <chr>           
-    ## 1 ObjectId(613ec9e4e9c… 2021-09-13 03:47:48 11QdjXo… [BPO] ENC… fb              
-    ## 2 ObjectId(613ed04623d… 2021-09-13 04:15:02 11QdjXo… [BPO] ENC… fb              
-    ## 3 ObjectId(6145000aec5… 2021-09-17 20:52:26 11QdjXo… [BPO] ENC… fb              
-    ## 4 ObjectId(61450071ec5… 2021-09-17 20:54:09 11QdjXo… [BPO] ENC… fb              
-    ## 5 ObjectId(61450357ec5… 2021-09-17 21:06:31 11QdjXo… [BPO] ENC… fb              
-    ## 6 ObjectId(614509a93f8… 2021-09-17 21:33:29 11QdjXo… [BPO] ENC… fb              
-    ## # … with 14 more variables: params.utm_medium <chr>, params.utm_campaign <chr>,
-    ## #   params.test <lgl>, params.testing <lgl>, totalTimeMin <dbl>,
+    ##   `_id`      createdAt           surve…¹ surve…² param…³ param…⁴ param…⁵ param…⁶
+    ##   <chr>      <dttm>              <chr>   <chr>   <chr>   <chr>   <chr>   <lgl>  
+    ## 1 ObjectId(… 2021-09-13 03:47:48 11QdjX… [BPO] … fb      cpc     live    TRUE   
+    ## 2 ObjectId(… 2021-09-13 04:15:02 11QdjX… [BPO] … fb      cpc     live    NA     
+    ## 3 ObjectId(… 2021-09-17 20:52:26 11QdjX… [BPO] … fb      cpc     live    NA     
+    ## 4 ObjectId(… 2021-09-17 20:54:09 11QdjX… [BPO] … fb      cpc     live    NA     
+    ## 5 ObjectId(… 2021-09-17 21:06:31 11QdjX… [BPO] … fb      cpc     live    NA     
+    ## 6 ObjectId(… 2021-09-17 21:33:29 11QdjX… [BPO] … fb      cpc     live    NA     
+    ## # … with 11 more variables: params.testing <lgl>, totalTimeMin <dbl>,
     ## #   fingerprint <chr>, sensataId <chr>, geolocation.coordinates <chr>,
     ## #   lat <dbl>, long <dbl>, browserReport.ip <chr>, browserReport.os.name <chr>,
-    ## #   browserReport.browser.name <chr>, trialUser.userId <lgl>
+    ## #   browserReport.browser.name <chr>, trialUser.userId <lgl>, and abbreviated
+    ## #   variable names ¹​surveyId, ²​surveyName, ³​params.utm_source,
+    ## #   ⁴​params.utm_medium, ⁵​params.utm_campaign, ⁶​params.test
+    ## # ℹ Use `colnames()` to see all variable names
 
 ``` r
 rawQ0DataExample
 ```
 
     ## # A tibble: 6 × 14
-    ##   newResponses.q0.identifier newResponses.q0.… newResponses.q0… newResponses.q0…
-    ##   <chr>                      <chr>                        <dbl> <chr>           
-    ## 1 q_AB_SC_00                 4ov5DSXKkrU7fbTz…                0 screen          
-    ## 2 q_AB_SC_00                 4ov5DSXKkrU7fbTz…                0 screen          
-    ## 3 q_AB_SC_00                 4ov5DSXKkrU7fbTz…                0 screen          
-    ## 4 q_AB_SC_00                 4ov5DSXKkrU7fbTz…                0 screen          
-    ## 5 q_AB_SC_00                 4ov5DSXKkrU7fbTz…                0 screen          
-    ## 6 q_AB_SC_00                 4ov5DSXKkrU7fbTz…                0 screen          
-    ## # … with 10 more variables: newResponses.q0.questionLength <dbl>,
-    ## #   newResponses.q0.question <chr>, newResponses.q0.selected <chr>,
-    ## #   newResponses.q0.timeToCompletion <dbl>, newResponses.q0.maxResponses <dbl>,
-    ## #   newResponses.q0.isSorting <lgl>, newResponses.q0.isOrdered <lgl>,
-    ## #   newResponses.q0.altOption <lgl>, newResponses.q0.options <chr>,
-    ## #   newResponses.q0.numberOfOptions <dbl>
+    ##   newResponses…¹ newRe…² newRe…³ newRe…⁴ newRe…⁵ newRe…⁶ newRe…⁷ newRe…⁸ newRe…⁹
+    ##   <chr>          <chr>     <dbl> <chr>     <dbl> <chr>   <chr>     <dbl>   <dbl>
+    ## 1 q_AB_SC_00     4ov5DS…       0 screen      196 "How c… next     216936       1
+    ## 2 q_AB_SC_00     4ov5DS…       0 screen      196 "How c… next       2480       1
+    ## 3 q_AB_SC_00     4ov5DS…       0 screen      224 "¿Cúal… next      14370       1
+    ## 4 q_AB_SC_00     4ov5DS…       0 screen      224 "¿Cúal… next       2857       1
+    ## 5 q_AB_SC_00     4ov5DS…       0 screen      224 "¿Cúal… next       4877       1
+    ## 6 q_AB_SC_00     4ov5DS…       0 screen      224 "¿Cúal… next       6520       1
+    ## # … with 5 more variables: newResponses.q0.isSorting <lgl>,
+    ## #   newResponses.q0.isOrdered <lgl>, newResponses.q0.altOption <lgl>,
+    ## #   newResponses.q0.options <chr>, newResponses.q0.numberOfOptions <dbl>, and
+    ## #   abbreviated variable names ¹​newResponses.q0.identifier,
+    ## #   ²​newResponses.q0.contentfulId, ³​newResponses.q0.qid, ⁴​newResponses.q0.type,
+    ## #   ⁵​newResponses.q0.questionLength, ⁶​newResponses.q0.question,
+    ## #   ⁷​newResponses.q0.selected, ⁸​newResponses.q0.timeToCompletion, …
+    ## # ℹ Use `colnames()` to see all variable names
 
 Normalmente el equipo de data utiliza el paquete *sensataDataProg* para
 dejar los datos como los queremos, una fila por individuo y cada columna
@@ -63,25 +67,26 @@ sensataExAnalysis
 ```
 
     ## # A tibble: 2,831 × 86
-    ##    id    geolocation.coo… q_EA_IS_00 q_EA_CA_01 q_EA_CA_04 q_EA_CA_21 q_EA_CA_05
-    ##    <chr> <chr>            <fct>      <chr>      <fct>      <fct>      <fct>     
-    ##  1 6101… [-73.9477268999… <NA>       Colombia   1-2 times… 2-3 times… 1-2 times…
-    ##  2 6101… [-74.7922088999… <NA>       Colombia   Never      2-3 times… 1-2 times…
-    ##  3 6101… [-74.1212159999… <NA>       Colombia   1-2 times… Every day  Never     
-    ##  4 6101… [-76.5372512,3.… <NA>       Colombia   Never      2-3 times… Never     
-    ##  5 6101… [-75.5393042,6.… <NA>       Colombia   Never      Every day  Never     
-    ##  6 6101… [-74.1015551999… <NA>       Colombia   2-3 times… Every day  Every day 
-    ##  7 6101… [-74.5354914,4.… <NA>       Colombia   Never      Every day  Never     
-    ##  8 6101… [-76.4678653,3.… <NA>       Colombia   Never      2-3 times… Never     
-    ##  9 6101… [-75.5826688,6.… <NA>       Colombia   1-2 times… Every day  Never     
-    ## 10 6101… [-74.0589567999… <NA>       Colombia   1-2 times… 2-3 times… Never     
-    ## # … with 2,821 more rows, and 79 more variables: q_EA_CA_22 <fct>,
-    ## #   q_EA_CA_06 <fct>, q_EA_MO_02 <fct>, q_EA_CU_01 <fct>, q_EA_CU_02 <fct>,
-    ## #   q_EA_JS_01 <fct>, q_EA_IN_01 <fct>, q_EA_CU_04 <fct>, q_EA_CU_05 <fct>,
-    ## #   q_EA_CU_06 <ord>, q_EA_IN_02 <ord>, q_EA_IN_08 <ord>, q_EA_IN_03 <ord>,
-    ## #   q_EA_IN_04 <ord>, q_EA_JS_02 <ord>, q_EA_IN_05 <ord>, q_EA_JS_03 <ord>,
-    ## #   q_EA_IN_07 <fct>, q_EA_MO_07 <fct>, q_EA_MO_08 <fct>, q_EA_MO_09 <fct>,
-    ## #   q_EA_IN_06 <fct>, q_EA_JS_04 <fct>, q_EA_JS_05 <fct>, q_EA_JS_06 <fct>, …
+    ##    id    geolo…¹ q_EA_…² q_EA_…³ q_EA_…⁴ q_EA_…⁵ q_EA_…⁶ q_EA_…⁷ q_EA_…⁸ q_EA_…⁹
+    ##    <chr> <chr>   <fct>   <chr>   <fct>   <fct>   <fct>   <fct>   <fct>   <fct>  
+    ##  1 6101… [-73.9… <NA>    Colomb… 1-2 ti… 2-3 ti… 1-2 ti… 1-2 ti… Never   Both o…
+    ##  2 6101… [-74.7… <NA>    Colomb… Never   2-3 ti… 1-2 ti… Never   Never   Both o…
+    ##  3 6101… [-74.1… <NA>    Colomb… 1-2 ti… Every … Never   Never   Never   Both o…
+    ##  4 6101… [-76.5… <NA>    Colomb… Never   2-3 ti… Never   Never   Never   Both o…
+    ##  5 6101… [-75.5… <NA>    Colomb… Never   Every … Never   Never   Never   Both o…
+    ##  6 6101… [-74.1… <NA>    Colomb… 2-3 ti… Every … Every … 1-2 ti… 1-2 ti… Both o…
+    ##  7 6101… [-74.5… <NA>    Colomb… Never   Every … Never   1-2 ti… Never   Both o…
+    ##  8 6101… [-76.4… <NA>    Colomb… Never   2-3 ti… Never   1-2 ti… Never   Both o…
+    ##  9 6101… [-75.5… <NA>    Colomb… 1-2 ti… Every … Never   Never   1-2 ti… Sugar …
+    ## 10 6101… [-74.0… <NA>    Colomb… 1-2 ti… 2-3 ti… Never   Never   Never   Both o…
+    ## # … with 2,821 more rows, 76 more variables: q_EA_CU_01 <fct>,
+    ## #   q_EA_CU_02 <fct>, q_EA_JS_01 <fct>, q_EA_IN_01 <fct>, q_EA_CU_04 <fct>,
+    ## #   q_EA_CU_05 <fct>, q_EA_CU_06 <ord>, q_EA_IN_02 <ord>, q_EA_IN_08 <ord>,
+    ## #   q_EA_IN_03 <ord>, q_EA_IN_04 <ord>, q_EA_JS_02 <ord>, q_EA_IN_05 <ord>,
+    ## #   q_EA_JS_03 <ord>, q_EA_IN_07 <fct>, q_EA_MO_07 <fct>, q_EA_MO_08 <fct>,
+    ## #   q_EA_MO_09 <fct>, q_EA_IN_06 <fct>, q_EA_JS_04 <fct>, q_EA_JS_05 <fct>,
+    ## #   q_EA_JS_06 <fct>, q_EA_MO_11 <ord>, q_EA_CU_07 <ord>, q_EA_IS_01 <fct>, …
+    ## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 
 R nos permite limpiar los datos como queremos, además de crear gráficos
 cómo nos gustan. Tiene la ventaja de que es freeware, gratis y
@@ -129,7 +134,7 @@ devtools::install_github(repo = "https://github.com/SensataUx/sensataDataAnalysi
 Instalar el paquete no implica que esté disponible para usar su
 funcionalidad. Por eso en el chunk anterior, después de instalar usé
 `devtools::install_github()`, accede al paquete *devtools* y utiliza la
-función *install\_github()*. Pero a veces vamos a usar muchas veces
+función *install_github()*. Pero a veces vamos a usar muchas veces
 distintas funciones de un paquete, para esto es necesario cargarlo. Esto
 se hace así:
 
@@ -249,7 +254,7 @@ p + g + labs(title = var_label(sensataExAnalysis$q_EA_CA_10),
   scale_fill_manual(values = movPaleta5)
 ```
 
-![](basicGuide_files/figure-gfm/createGraph-1.png)<!-- -->
+![](intro_files/figure-gfm/createGraph-1.png)<!-- -->
 
 ``` r
 # ggsave(filename = "figures/q_MV_JG_26_Tot_PMC.png", device = "png", height = 7, width = 14, units = "cm")
