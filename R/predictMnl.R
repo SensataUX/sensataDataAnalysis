@@ -37,7 +37,7 @@ predictMnl <- function(model,data){
 
   # max share
   utilityMax <- data.model %*% (model$coef + 2*std)
-  shareMin <- exp(utilityMax)/sum(exp(utilityMax))*100
+  shareMax <- exp(utilityMax)/sum(exp(utilityMax))*100
 
   out <- cbind(share, shareMin, shareMax, data)
   out
