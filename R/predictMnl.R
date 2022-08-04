@@ -25,8 +25,21 @@
 
 predictMnl <- function(model,data){
   data.model <- model.matrix(update(model$formula, 0~.) , data = data) [,-1]
+  std <- summary(model)$CoefTable[,2]
 
+  # share
   utility <- data.model %*% model$coef
   share <- exp(utility)/sum(exp(utility))*100
-  cbind(share,data)
+
+  # min share
+  utilityMin <- data.model %*% model$coef - 2*std
+  shareMin <- exp(utilityMin)/sum(exp(utilityMin))*100
+
+  # max share
+  utilityMax <- data.model %*% model$coef + 2*std
+  shareMin <- exp(utilityMax)/sum(exp(utilityMax))*100
+
+  out <- cbind(share, shareMin, shareMax, data)
+  out
+
 }
