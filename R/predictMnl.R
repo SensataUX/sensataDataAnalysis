@@ -40,6 +40,14 @@ predictMnl <- function(model,data){
   shareMax <- exp(utilityMax)/sum(exp(utilityMax))*100
 
   out <- cbind(share, shareMin, shareMax, data)
-  out
 
+  # flip
+  out$sMin <- out$shareMin
+  out$sMin[out$shareMin>out$shareMax] <- out$shareMax[out$shareMin>out$shareMax]
+
+  out$sMax <- out$shareMax
+  out$sMax[out$shareMin>out$shareMax] <- out$shareMin[out$shareMin>out$shareMax]
+
+  out <- out %>% select(-shareMin, -shareMax)
+  out
 }
