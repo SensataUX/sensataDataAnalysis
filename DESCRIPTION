@@ -1,7 +1,7 @@
 Package: sensataDataAnalysis
 Type: Package
 Title: Package for Analysis of Sensata Survey Data
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: 
   c(person(given = "Gabriel N.",
            family = "Camargo-Toledo",

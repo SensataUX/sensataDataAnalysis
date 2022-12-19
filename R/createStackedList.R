@@ -1,4 +1,4 @@
-#  createStacked --------------------------------------------------------------------
+#  createStackedList --------------------------------------------------------------------
 #' Function to create data for graphs
 #'
 #' This function creates weighted graphData and plots of the stacked variety (normally likerts).
@@ -19,7 +19,7 @@
 #' @export
 
 
-createStacked <- function(varString,
+createStackedList <- function(varString,
                           groupVar,
                           weightVar = "ponde",
                           totalColumn = F) {
