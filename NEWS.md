@@ -1,3 +1,7 @@
+#sensataDataAnalysis 0.3.0
+
+* Add createStacked wrapper to easily create several graphs with very few lines.
+
 #sensataDataAnalysis 0.2.1
 
 * Add IC to predictMnl for multinomial logit for conjoint data.

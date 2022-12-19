@@ -1,0 +1,38 @@
+---
+title: "Usando createStackedList para crear muchas gráficas con un solo llamado"
+author: "Gabriel N. Camargo-Toledo"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usando createStackedList para crear muchas gráficas con un solo llamado}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(sensataDataAnalysis)
+
+sensataExAnalysis <- sensataDataAnalysis::sensataExAnalysis
+```
+
+# Cómo crear muchas gráficas sin repetir mucho código  <img src="../figures/sensata-small-logo-512x512.png" align="right" width="120" />
+
+Este documento presenta una introducción al uso de la función *createStackedList* para crear muchas gráficas y tablas en usando pocas líneas.
+
+# Ejemplo
+PENDIENTE EXPLICAR EL EJEMPLO Y SU USO
+```{r example}
+vars2Graph <- c("q_EA_VA_01",
+                "q_EA_VA_01",
+                "q_EA_VA_04")
+
+stackedHijosLists <- map(vars2Graph, ~ createStackedList(.x, groupVar = "Edad"))
+names(stackedHijosLists) <- vars2Graph
+```
