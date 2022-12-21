@@ -27,7 +27,7 @@ Este documento presenta una introducción al uso de la función *createStackedLi
 
 # Ejemplo
 PENDIENTE EXPLICAR EL EJEMPLO Y SU USO
-```{r example}
+```{r example, eval=FALSE}
 intData <- sensataDataAnalysis::sensataExAnalysis
 #paleta
 PSPaleta <- c("#003f5c",
