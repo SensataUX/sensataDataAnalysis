@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(echo = TRUE)
 library(sensataDataAnalysis)
 
-sensataExAnalysis <- sensataDataAnalysis::sensataExAnalysis
 ```
 
 # Cómo crear muchas gráficas sin repetir mucho código  <img src="../figures/sensata-small-logo-512x512.png" align="right" width="120" />
@@ -29,6 +28,17 @@ Este documento presenta una introducción al uso de la función *createStackedLi
 # Ejemplo
 PENDIENTE EXPLICAR EL EJEMPLO Y SU USO
 ```{r example}
+intData <- sensataDataAnalysis::sensataExAnalysis
+#paleta
+PSPaleta <- c("#003f5c",
+              "#58508d",
+              "#bc5090",
+              "#ff6361",
+              "#ffa600",
+              "#C0C0C0")
+                       
+
+
 vars2Graph <- c("q_EA_VA_01",
                 "q_EA_VA_01",
                 "q_EA_VA_04")
