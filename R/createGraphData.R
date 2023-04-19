@@ -43,7 +43,7 @@ createGraphData <- function(df = intData,
 
   valsData <- graphData %>%
     group_by(across(all_of(groupVar)))  %>%
-    summarise(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
+    reframe(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
               Value = vals)
 
   valsData$Porcentaje <- as.double(valsData$Porcentaje)
