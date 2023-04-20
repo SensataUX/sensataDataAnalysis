@@ -101,7 +101,7 @@ createFreqTables <- function(df,
         # Creating percentage table if asked --------------------------------------
         if (percent) {
           tab[[paste0(r,c)]] <- as.data.frame(prop.table(t, marginPropTable)*100)
-          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] %>% rename("%" = Freq)
+          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] |> rename("%" = Freq)
         } else {
           tab[[paste0(r,c)]] <- as.data.frame(t)
         }
@@ -110,11 +110,11 @@ createFreqTables <- function(df,
         print(labr)
         if (!is.null(colsVec)) {
           tab[[paste0(r,c)]][["VarCruce"]] <- labc
-          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] %>% rename("Respuesta" = Var1, "Cruce" = Var2)
-          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] %>% relocate(Pregunta, VarCruce, Respuesta, Cruce)
+          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] |> rename("Respuesta" = Var1, "Cruce" = Var2)
+          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] |> relocate(Pregunta, VarCruce, Respuesta, Cruce)
         } else {
-          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] %>% rename("Respuesta" = Var1)
-          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] %>% relocate(Pregunta, Respuesta)
+          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] |> rename("Respuesta" = Var1)
+          tab[[paste0(r,c)]] <- tab[[paste0(r,c)]] |> relocate(Pregunta, Respuesta)
         }
       }
     }
@@ -149,7 +149,7 @@ createFreqTables <- function(df,
         # Creating percentage table if asked --------------------------------------
         if (percent) {
           tab[[r]] <- as.data.frame(prop.table(t, marginPropTable)*100)
-          tab[[r]] <- tab[[r]] %>% rename("%" = Freq)
+          tab[[r]] <- tab[[r]] |> rename("%" = Freq)
         } else {
           tab[[r]] <- as.data.frame(t)
         }
@@ -158,26 +158,26 @@ createFreqTables <- function(df,
         print(labr)
         if (!is.null(colsVec)) {
           tab[[r]][["VarCruce"]] <- labc
-          tab[[r]] <- tab[[r]] %>% rename("Respuesta" = Var1, "Cruce" = Var2)
-          tab[[r]] <- tab[[r]] %>% relocate(Pregunta, VarCruce, Respuesta, Cruce)
+          tab[[r]] <- tab[[r]] |> rename("Respuesta" = Var1, "Cruce" = Var2)
+          tab[[r]] <- tab[[r]] |> relocate(Pregunta, VarCruce, Respuesta, Cruce)
         } else {
-          tab[[r]] <- tab[[r]] %>% rename("Respuesta" = Var1)
-          tab[[r]] <- tab[[r]] %>% relocate(Pregunta, Respuesta)
+          tab[[r]] <- tab[[r]] |> rename("Respuesta" = Var1)
+          tab[[r]] <- tab[[r]] |> relocate(Pregunta, Respuesta)
         }
       }
     }
   tab <- do.call(bind_rows, tab)
   if (percent) {
     tab[["%"]] <- round(as.numeric(tab[["%"]]), 2)
-    tab <- tab %>% mutate(`%`=str_c(`%`, "%"))
+    tab <- tab |> mutate(`%`=str_c(`%`, "%"))
   } else {
     tab [["Freq"]] <- round(as.numeric(tab[["Freq"]]), 0)
   }
   if (wide && !percent) {
-    tab <- tab %>% pivot_wider(names_from = c("VarCruce", "Cruce"), values_from = Freq)
+    tab <- tab |> pivot_wider(names_from = c("VarCruce", "Cruce"), values_from = Freq)
   }
   if (wide && percent) {
-    tab <- tab %>% pivot_wider(names_from = c("VarCruce", "Cruce"), values_from = `%`)
+    tab <- tab |> pivot_wider(names_from = c("VarCruce", "Cruce"), values_from = `%`)
   }
   # checking labels and rows sizes ------------------------------------------
 

@@ -2,16 +2,25 @@
 % Please edit documentation in R/sensataTheme.R
 \name{theme_sensata}
 \alias{theme_sensata}
-\title{Sensata ggplot theme with several color palettes}
+\title{theme_sensata: Custom Theme for Sensata}
 \usage{
-theme_sensata(base_size = 12, base_family = "sans")
+theme_sensata()
 }
-\arguments{
-\item{base_size}{base font size, given in pts.}
-
-\item{base_family}{base font family}
+\value{
+A ggplot2 theme object
 }
 \description{
-Sensata ggplot theme with several color palettes
+A custom theme for Sensata with custom color palette and fonts for ggplot2.
 }
-\concept{themes fivethirtyeight}
+\examples{
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point() +
+  theme_sensata()
+}
+\seealso{
+\code{\link[ggplot2]{theme}}
+
+\code{\link[showtext]{showtext_auto}}
+
+\code{\link[sysfonts]{font_add_google}}
+}

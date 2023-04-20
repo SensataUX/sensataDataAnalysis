@@ -72,11 +72,11 @@ createExtendedDict <- function(dict,
     rlang::abort("You provided a different number of abbreviations than questions")
   }
   # Select columns from dict
-  dict <- dict %>%
+  dict <- dict |>
     select(identifier, question, type, numberOfOptions)
 
   # Keep questions
-  dict <- dict %>% filter(identifier %in% questions | identifier %in% disag) %>%
+  dict <- dict |> filter(identifier %in% questions | identifier %in% disag) |>
     unique()
 
   # Create disag column
@@ -136,7 +136,7 @@ createDashboardMatrix <- function(extDict,
                                   weight = NULL,
                                   addIdentifier = FALSE,
                                   totals = TRUE){
-  extDict <- extDict %>% rename("Pregunta" = "question")
+  extDict <- extDict |> rename("Pregunta" = "question")
 
   countTab <- createFreqTables(
     df = df,
@@ -150,19 +150,19 @@ createDashboardMatrix <- function(extDict,
   )
 
   #create topic column
-  topicData <- extDict %>% select(Pregunta, topic)
-  countTab <- countTab %>% left_join(topicData, by = "Pregunta")
+  topicData <- extDict |> select(Pregunta, topic)
+  countTab <- countTab |> left_join(topicData, by = "Pregunta")
 
   # Create comments column
   if (("comments" %in% colnames(extDict))){
-    commentsData <- extDict %>% select(Pregunta, comments)
-    countTab <- countTab %>% left_join(commentsData, by = "Pregunta")
+    commentsData <- extDict |> select(Pregunta, comments)
+    countTab <- countTab |> left_join(commentsData, by = "Pregunta")
   }
 
   # Create abbrev column
   if (("abbrev" %in% colnames(extDict))){
-    abbrevData <- extDict %>% select(Pregunta, abbrev)
-    countTab <- countTab %>% left_join(abbrevData, by = "Pregunta")
+    abbrevData <- extDict |> select(Pregunta, abbrev)
+    countTab <- countTab |> left_join(abbrevData, by = "Pregunta")
   }
 
   perTab <- createFreqTables(
@@ -174,20 +174,20 @@ createDashboardMatrix <- function(extDict,
     labels = extDict$labels[extDict$disag],
     percent = T
   )
-  perTab$`%` %>% str_remove("%") %>% as.double()
+  perTab$`%` |> str_remove("%") |> as.double()
 
 
   #create topic column
-  perTab <- perTab %>% left_join(topicData, by = "Pregunta")
+  perTab <- perTab |> left_join(topicData, by = "Pregunta")
 
   # Create comments column
   if (("comments" %in% colnames(extDict))){
-    perTab <- perTab %>% left_join(commentsData, by = "Pregunta")
+    perTab <- perTab |> left_join(commentsData, by = "Pregunta")
   }
 
   # Create abbrev column
   if (("abbrev" %in% colnames(extDict))){
-    perTab <- perTab %>% left_join(abbrevData, by = "Pregunta")
+    perTab <- perTab |> left_join(abbrevData, by = "Pregunta")
   }
 
   if(nrow(perTab) != nrow(countTab)){
@@ -195,7 +195,7 @@ createDashboardMatrix <- function(extDict,
     outputTab <- list(countTab = countTab, perTab = perTab)
   } else {
     outputTab <- full_join(countTab, perTab)
-    outputTab <- outputTab %>% relocate("%", .after = "Freq")
+    outputTab <- outputTab |> relocate("%", .after = "Freq")
   }
 
   if(totals == T){
@@ -208,19 +208,19 @@ createDashboardMatrix <- function(extDict,
       percent = F,
       addIdentifier = addIdentifier
     )
-    # countTotTab <- countTotTab %>% rename("Total" = "Freq")
-    countTotTab$`%` %>% str_remove("%") %>% as.double()
+    # countTotTab <- countTotTab |> rename("Total" = "Freq")
+    countTotTab$`%` |> str_remove("%") |> as.double()
     #create topic column
-    countTotTab <- countTotTab %>% left_join(topicData, by = "Pregunta")
+    countTotTab <- countTotTab |> left_join(topicData, by = "Pregunta")
 
     # Create comments column
     if (("comments" %in% colnames(extDict))){
-      countTotTab <- countTotTab %>% left_join(commentsData, by = "Pregunta")
+      countTotTab <- countTotTab |> left_join(commentsData, by = "Pregunta")
     }
 
     # Create abbrev column
     if (("abbrev" %in% colnames(extDict))){
-      countTotTab <- countTotTab %>% left_join(abbrevData, by = "Pregunta")
+      countTotTab <- countTotTab |> left_join(abbrevData, by = "Pregunta")
     }
 
     # Total %
@@ -231,27 +231,27 @@ createDashboardMatrix <- function(extDict,
       wide = F,
       percent = T
     )
-    # perTotTab <- perTotTab %>% rename("% Total" = "%")
-    perTotTab$`% Total` %>% str_remove("%") %>% as.double() #TODO: Porqué esta linea no funciona?
+    # perTotTab <- perTotTab |> rename("% Total" = "%")
+    perTotTab$`% Total` |> str_remove("%") |> as.double() #TODO: Porqué esta linea no funciona?
     #create topic column
-    perTotTab <- perTotTab %>% left_join(topicData, by = "Pregunta")
+    perTotTab <- perTotTab |> left_join(topicData, by = "Pregunta")
 
     # Create comments column
     if (("comments" %in% colnames(extDict))){
-      perTotTab <- perTotTab %>% left_join(commentsData, by = "Pregunta")
+      perTotTab <- perTotTab |> left_join(commentsData, by = "Pregunta")
     }
 
     # Create abbrev column
     if (("abbrev" %in% colnames(extDict))){
-      perTotTab <- perTotTab %>% left_join(abbrevData, by = "Pregunta")
+      perTotTab <- perTotTab |> left_join(abbrevData, by = "Pregunta")
     }
 
-    totTab <- countTotTab %>% full_join(perTotTab, by = c("Pregunta", "Respuesta", "topic", "comments"))
+    totTab <- countTotTab |> full_join(perTotTab, by = c("Pregunta", "Respuesta", "topic", "comments"))
 
     #create Output tab
     totTab$VarCruce <- "Total"
     totTab$Cruce <- "Total"
-    outputTab <- outputTab %>% bind_rows(totTab)
+    outputTab <- outputTab |> bind_rows(totTab)
 
     rlang::warn("Included totals at the end of matrix")
 

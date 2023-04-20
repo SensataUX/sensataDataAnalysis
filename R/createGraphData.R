@@ -26,7 +26,7 @@ createGraphData <- function(df = intData,
                             weightVar = "ponde",
                             totalColumn = T){
 
-  graphData <- df %>% select(all_of(originVar), all_of(groupVar), all_of(weightVar))
+  graphData <- df |> select(all_of(originVar), all_of(groupVar), all_of(weightVar))
   graphData$y <- graphData[[originVar]]
   if(is.null(weightVar)){
     graphData$ponde <- 1
@@ -41,24 +41,24 @@ createGraphData <- function(df = intData,
 
   graphData <- na.omit(graphData)
 
-  valsData <- graphData %>%
-    group_by(across(all_of(groupVar)))  %>%
+  valsData <- graphData |>
+    group_by(across(all_of(groupVar)))  |>
     reframe(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
               Value = vals)
 
   valsData$Porcentaje <- as.double(valsData$Porcentaje)
 
-  valsData$Value <- valsData$Value %>% factor(levels = vals, ordered = T)
+  valsData$Value <- valsData$Value |> factor(levels = vals, ordered = T)
 
   if (totalColumn){
-    totalData <- graphData %>%
-      ungroup() %>%
-      summarise(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
+    totalData <- graphData |>
+      ungroup() |>
+      reframe(Porcentaje = prop.table(questionr::wtd.table(y, weights = ponde),)*100,
                 Value = vals)
     totalData[[groupVar]] <- "Total"
 
     totalData$Porcentaje <- as.double(totalData$Porcentaje)
-    totalData$Value <- totalData$Value %>% factor(levels = vals, ordered = T)
+    totalData$Value <- totalData$Value |> factor(levels = vals, ordered = T)
     outData <- bind_rows(valsData, totalData)
   } else {
     outData <- valsData

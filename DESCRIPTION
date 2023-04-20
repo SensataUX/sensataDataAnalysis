@@ -1,7 +1,7 @@
 Package: sensataDataAnalysis
 Type: Package
 Title: Package for Analysis of Sensata Survey Data
-Version: 0.3.1
+Version: 0.8.0
 Authors@R: 
   c(person(given = "Gabriel N.",
            family = "Camargo-Toledo",
@@ -16,9 +16,9 @@ Maintainer: Gabriel N. Camargo-Toledo <gcamargo@sensata.io>
 Description: This package has the functions regularly used for our data analysis
     Creating weights, creating graphs, cluster analysis, linear regression, conjoint analysis.
 Depends:
-    R (>= 4.0.0),
+    R (>= 4.1.0),
     sensataDataProg,
-    tidyverse (>= 1.3.0),
+    tidyverse (>= 2.0.0),
     labelled (>= 2.7.0),
     showtext (>= 0.9)
 Roxygen: list(markdown = TRUE)
@@ -32,7 +32,9 @@ Imports:
     interactions,
     Hmisc, 
     questionr,
-    sensataDataProg
+    sensataDataProg,
+    showtext,
+    sysfonts
 Remotes: 
     SensataUx/sensataDataProg
 Suggests:

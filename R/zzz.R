@@ -8,8 +8,11 @@ Sensata UX (c)
 ------------------------------------------------")
 }
 
-.onLoad <- function(libname, pkgname) {
-  sysfonts::font_add_google("Open Sans", "open-sans")
-  sysfonts::font_add_google("Montserrat", "Montserrat")
+.onAttach <- function(libname, pkgname) {
+  # Load fonts
+  sysfonts::font_add_google(name = "Open Sans", family = "Open Sans")
+  sysfonts::font_add_google(name = "News Cycle", family = "News Cycle")
+  sysfonts::font_add_google(name = "Montserrat", family = "montserrat")
   showtext::showtext_auto()
+
 }

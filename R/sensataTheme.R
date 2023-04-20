@@ -1,75 +1,60 @@
-#' Sensata ggplot theme with several color palettes
+#' theme_sensata: Custom Theme for Sensata
 #'
+#' A custom theme for Sensata with custom color palette and fonts for ggplot2.
 #'
-#' @inheritParams ggplot2::theme_grey # This here inherits params from theme_grey
-#' @family themes fivethirtyeight
+#' @return A ggplot2 theme object
 #' @export
-#TODO: ADD EXAMPLE
-# #' @example inst/examples/ex-theme_fivethirtyeight.R
-#' @importFrom grid unit
-theme_sensata <- function(base_size = 12, base_family = "sans") {
-  colors <- deframe(ggthemes::ggthemes_data[["fivethirtyeight"]])
-  (theme_foundation(base_size = base_size, base_family = base_family)
-    + theme(
-      line = element_line(colour = "black"),
-      rect = element_rect(fill = colors["Light Gray"],
-                          linetype = 0, colour = NA),
-      text = element_text(colour = colors["Dark Gray"]),
-      axis.title = element_blank(),
-      axis.text = element_text(),
-      axis.ticks = element_blank(),
-      axis.line = element_blank(),
-      legend.background = element_rect(),
-      legend.position = "bottom",
-      legend.direction = "horizontal",
-      legend.box = "vertical",
-      panel.grid = element_line(colour = NULL),
-      panel.grid.major =
-        element_line(colour = colors["Medium Gray"]),
-      panel.grid.minor = element_blank(),
-      # unfortunately, can't mimic subtitles TODO!
-      plot.title = element_text(hjust = 0, size = rel(1.5), face = "bold"),
-      plot.margin = unit(c(1, 1, 1, 1), "lines"),
-      strip.background = element_rect()))
+#' @examples
+#' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+#'   geom_point() +
+#'   theme_sensata()
+#' @seealso \code{\link[ggplot2]{theme}}
+#' @seealso \code{\link[showtext]{showtext_auto}}
+#' @seealso \code{\link[sysfonts]{font_add_google}}
+theme_sensata <- function() {
+
+  # Create ggplot2 theme
+  theme_sensata <- theme(
+    text = element_text(family = "Open Sans"),
+    axis.title = element_text(colour = "dimgray"),
+    axis.text.x = element_text(colour = "dimgray"),
+    axis.text.y = element_text(colour = "dimgray"),
+    legend.text = element_text(colour = "dimgray"),
+    legend.title = element_text(colour = "dimgray"),
+    plot.title = element_text(family = "Montserrat",
+                              colour = "black",
+                              lineheight=1),
+    plot.caption = element_text(colour = "dimgray"),
+    plot.subtitle = element_text(family = "Montserrat"),
+    panel.background = element_rect(linewidth = 0, fill = "white"),
+    panel.grid.major = element_line(linewidth = 0.5, linetype = 'solid',
+                                    colour = "gray85"),
+    panel.grid.major.x = element_blank(),
+    legend.key=element_rect(fill = "white", colour = "white"),
+    plot.background = element_rect(fill = "white"),
+    panel.border = element_blank(),
+    # Add any additional customizations here
+    # ...
+  )
+
+  return(theme_sensata)
 }
 
-#' FiveThirtyEight color palette
+#' Palette for Sensata Theme
 #'
-#' The standard three-color FiveThirtyEight palette for line plots comprises
-#' blue, red, and green.
+#' A custom color palette for Sensata theme.
 #'
-#' @family colour fivethirtyeight
+#' @return A vector of colors
 #' @export
-# @example TBD
-# inst/examples/ex-fivethirtyeight_pal.R
-fivethirtyeight_pal <- function() {
-  colors <- deframe(ggthemes::ggthemes_data[["fivethirtyeight"]])
-  values <- unname(colors[c("Blue", "Red", "Green")])
-  max_n <- length(values)
-  f <- manual_pal(values)
-  attr(f, "max_n") <- max_n
-  f
-}
-
-#' FiveThirtyEight color scales
-#'
-#' Color scales using the colors in the FiveThirtyEight graphics.
-#'
-#' @inheritParams ggplot2::scale_colour_hue
-#' @family colour fivethirtyeight
-#' @rdname scale_fivethirtyeight
-#' @seealso \code{\link{theme_fivethirtyeight}()} for examples.
-#' @export
-scale_colour_fivethirtyeight <- function(...) {
-  discrete_scale("colour", "economist", fivethirtyeight_pal(), ...)
-}
-
-#' @rdname scale_fivethirtyeight
-#' @export
-scale_color_fivethirtyeight <- scale_colour_fivethirtyeight
-
-#' @rdname scale_fivethirtyeight
-#' @export
-scale_fill_fivethirtyeight <- function(...) {
-  discrete_scale("fill", "economist", fivethirtyeight_pal(), ...)
+#' @examples
+#' my_palette <- sensata_palette()
+#' my_palette
+sensata_palette <- function(palette = c("#003f5c",
+                                        "#58508d",
+                                        "#bc5090",
+                                        "#ff6361",
+                                        "#ffa600",
+                                        "#C0C0C0")) {
+  sensata_palette <- palette
+  return(sensata_palette)
 }
