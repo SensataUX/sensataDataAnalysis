@@ -171,7 +171,7 @@ createFreqTables <- function(df,
     tab[["%"]] <- round(as.numeric(tab[["%"]]), 2)
     tab <- tab |> mutate(`%`=str_c(`%`, "%"))
   } else {
-    tab [["Freq"]] <- round(as.numeric(tab[["Freq"]]), 0)
+    tab [["Freq"]] <- round(as.numeric(tab[["Freq"]]), 2)
   }
   if (wide && !percent) {
     tab <- tab |> pivot_wider(names_from = c("VarCruce", "Cruce"), values_from = Freq)
